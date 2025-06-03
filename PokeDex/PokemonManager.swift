@@ -93,7 +93,7 @@ class PokemonManager: ObservableObject {
     }
 
     private func loadFavorites() {
-        let favoriteNames = UserDefaults.standard.stringArray(forKey: "favorites") ?? []
+        _ = UserDefaults.standard.stringArray(forKey: "favorites") ?? []
         // Will be populated when main list is loaded
     }
 }
