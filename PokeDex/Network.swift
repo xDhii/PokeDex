@@ -26,8 +26,8 @@ class Network {
         }
     }
 
-    func fetchList() async throws -> [PokemonDTO] {
-        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon") else {
+    func fetchList(offset: Int = 0, limit: Int = 20) async throws -> [PokemonDTO] {
+        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?offset=\(offset)&limit=\(limit)") else {
             throw NetworkErrors.url
         }
 

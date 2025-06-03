@@ -64,7 +64,7 @@ struct ContentView: View {
                 .padding(.bottom, 16)
                 .background(Color(.systemBackground))
 
-                // Pokemon grid
+                // Pokemon grid with infinite scrolling
                 ScrollView {
                     LazyVGrid(columns: [
                         GridItem(.flexible(), spacing: 8),
@@ -75,9 +75,31 @@ struct ContentView: View {
                                 ModernPokemonCard(pokemon: pokemon)
                             }
                             .buttonStyle(PlainButtonStyle())
+                            .onAppear {
+                                Task {
+                                    await pokemonManager.loadMorePokemonsIfNeeded(for: pokemon)
+                                }
+                            }
+                        }
+
+                        // Loading indicator at the bottom
+                        if pokemonManager.isLoading {
+                            HStack {
+                                Spacer()
+                                ProgressView("Carregando mais Pokémons...")
+                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                                Spacer()
+                            }
+                            .padding()
+                            .gridCellColumns(2) // Spans both columns
                         }
                     }
                     .padding(.horizontal, 16)
+                }
+                .refreshable {
+                    pokemonManager.resetPagination()
+                    await pokemonManager.loadPokemons()
                 }
             }
             .navigationBarHidden(true)
