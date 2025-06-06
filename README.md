@@ -40,11 +40,9 @@ The project emphasizes clean code, scalability, and modern iOS development pract
 
 ### Screenshots
 
-*(Replace placeholders with actual high-resolution screenshots of your app)*
-
 | Home Screen (Grid & Search) | Pokemon Detail (Stats & Info) | Favorites Screen |
 |---|---|---|
-| `![Home Screen](placeholder_home_screen.png)` | `![Pokemon Detail](placeholder_detail_view.png)` | `![Favorites Screen](placeholder_favorites_screen.png)` |
+| ![image](https://github.com/user-attachments/assets/37e944ad-8db3-4c6b-8cd7-5300cd33ef97) | ![image](https://github.com/user-attachments/assets/b7695037-bfaf-4db0-b8b3-86ac7279da4a) | ![image](https://github.com/user-attachments/assets/b79ac892-18e6-4f75-a59f-d35703dfeaed) |
 
 ---
 
@@ -137,7 +135,7 @@ PokeDex/
 
 ## 📋 Requirements
 
-*   iOS 15.0+
+*   iOS 18.0+
 *   Xcode 16.4+
 *   Swift 6.1+
 
