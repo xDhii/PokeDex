@@ -164,20 +164,6 @@ The application will build and launch on the selected device/simulator.
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome and greatly appreciated! If you have suggestions for improvements or want to fix a bug:
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/YourAmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add YourAmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/YourAmazingFeature`)
-5.  Open a Pull Request
-
-Please ensure your code follows the project's coding style and includes relevant tests if applicable.
-
----
-
 ## 📄 License
 
 This project is distributed under the MIT License. See the `LICENSE` file for more information. (Note: Please add a `LICENSE` file to your repository if one doesn't exist).
@@ -186,7 +172,7 @@ This project is distributed under the MIT License. See the `LICENSE` file for mo
 
 ## 📧 Contact
 
-Owner: **xDhii**
+Owner: **Adriano Valumin**
 
 Project Link: [https://github.com/xDhii/PokeDex](https://github.com/xDhii/PokeDex)
 
