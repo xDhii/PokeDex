@@ -60,7 +60,7 @@ struct ContentView: View {
                     ], spacing: 12) {
                         ForEach(viewModel.filteredPokemons) { pokemon in
                             NavigationLink(destination: DetailView(pokemon: pokemon)) {
-                                ModernPokemonCard(pokemon: pokemon)
+                                PokemonCard(pokemon: pokemon)
                             }
                             .buttonStyle(PlainButtonStyle())
                             .onAppear {

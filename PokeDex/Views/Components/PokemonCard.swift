@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ModernPokemonCard: View {
+struct PokemonCard: View {
     let pokemon: Pokemon
     @StateObject private var pokemonService = PokemonService.shared
 
@@ -85,7 +85,7 @@ struct ModernPokemonCard: View {
 }
 
 #Preview {
-    ModernPokemonCard(
+    PokemonCard(
         pokemon: Pokemon(data: PokemonDTO(name: "Pikachu"), cover: PokemonCover(indexImage: 25))
     )
     .frame(width: 160)
