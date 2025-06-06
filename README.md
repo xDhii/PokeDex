@@ -1,88 +1,78 @@
-# PokeDex iOS
 
-A modern iOS application built with SwiftUI that allows users to browse, search, and manage their favorite Pokémon using the PokéAPI.
+# ✨ PokeDex iOS App ✨
 
-## 📱 Screenshots
+[![Swift Version](https://img.shields.io/badge/Swift-6.1%2B-orange.svg)](https://swift.org)
+[![Platform](https://img.shields.io/badge/platform-iOS%2015.0%2B-lightgrey.svg)](https://developer.apple.com/ios/)
+[![Xcode Version](https://img.shields.io/badge/Xcode-16.4%2B-blue.svg)](https://developer.apple.com/xcode/)
+[![Architecture](https://img.shields.io/badge/Architecture-MVVM%20(ObservableObject)-blueviolet.svg)](https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app)
+[![API](https://img.shields.io/badge/API-PokeAPI%20v2-red.svg)](https://pokeapi.co/)
+[![UI Framework](https://img.shields.io/badge/UI-SwiftUI%20%26%20Combine-green.svg)](https://developer.apple.com/documentation/swiftui)
 
-<!-- Add your app screenshots here -->
-| Home Screen | Pokemon Detail | Favorites |
-|-------------|----------------|-----------|
-| ![Home](screenshots/home.png) | ![Detail](screenshots/detail.png) | ![Favorites](screenshots/favorites.png) |
+Welcome to the PokeDex iOS application repository! This is a modern, native iOS application built with SwiftUI and Combine, providing a clean, feature-rich, and intuitive interface for exploring the fascinating world of Pokémon. It leverages the power of the **PokeAPI** for comprehensive data and incorporates features like real-time search and favorites management.
 
-## ✨ Features
+---
 
-- 📋 **Browse Pokémon**: Infinite scroll through the complete Pokédex with grid layout
-- 🔍 **Real-time Search**: Find your favorite Pokémon instantly with live search
-- ❤️ **Favorites System**: Save and manage your favorite Pokémon with persistent storage
-- 🗂️ **Filter Toggle**: Switch between viewing all Pokémon or favorites only
-- 🗑️ **Delete Functionality**: Remove Pokémon from your collection
-- 📊 **Detailed Stats**: View comprehensive Pokémon information including:
-  - Height and Weight with proper unit conversion
-  - Abilities with styled presentation
-  - Base Stats with visual progress bars
-  - Type badges with color coding
-- 🎨 **Modern UI**: Clean SwiftUI interface with:
-  - Dynamic type-based color theming
-  - Gradient backgrounds
-  - Card-based layout
-  - Pull-to-refresh functionality
-- 📱 **iOS Native**: Built specifically for iOS with native performance and async/await
+## 🚀 Overview
 
-## 🛠 Tech Stack
+This application serves as a robust digital encyclopedia for Pokémon enthusiasts. Users can seamlessly browse through a dynamically loaded grid of Pokémon, utilize real-time search, view detailed information (including stats with visual progress bars, abilities, types with dynamic color theming), and manage their favorite Pokémon with persistent storage.
 
-- **Language**: Swift 5.5+
-- **Framework**: SwiftUI + Combine
-- **Architecture**: MVVM with ObservableObject pattern
-- **Networking**: URLSession with async/await
-- **Data Persistence**: UserDefaults for favorites
-- **State Management**: @Published properties with Combine bindings
-- **API**: [PokéAPI v2](https://pokeapi.co/)
+The project emphasizes clean code, scalability, and modern iOS development practices, structured around the MVVM architecture using `ObservableObject` and Combine for state management.
 
-## 📋 Requirements
+## 🎨 Key Features
 
-- iOS 15.0+
-- Xcode 13.0+
-- Swift 5.5+
+*   📱 **Modern UI (SwiftUI):** Clean, card-based layout with gradient backgrounds and dynamic type-based color theming.
+*   🔍 **Browse Pokémon:** Infinite scroll through the complete Pokédex with a grid layout.
+*   ⚡ **Real-time Search:** Find your favorite Pokémon instantly with live search functionality.
+*   ❤️ **Favorites System:** Save and manage your favorite Pokémon with persistent storage (using `UserDefaults`).
+*   ⚖️ **Filter Toggle:** Easily switch between viewing all Pokémon or only your favorites.
+*   🗑️ **Delete Functionality:** Remove Pokémon from your favorites collection.
+*   📊 **Detailed Stats View:** Comprehensive Pokémon information including:
+    *   Height and Weight with proper unit conversion.
+    *   Abilities with styled presentation.
+    *   Base Stats with visual progress bars.
+    *   Type badges with color coding.
+*   🔄 **Pull-to-refresh:** Update the Pokémon list easily.
+*   🔌 **PokeAPI Integration:** Fetches live data from the official [PokeAPI v2](https://pokeapi.co/).
+*   🏗️ **MVVM Architecture:** Clean separation of concerns using the Model-View-ViewModel pattern with `ObservableObject`.
+*   ⚙️ **Swift Concurrency & Combine:** Built using modern Swift features like `async/await` and the Combine framework for handling asynchronous operations and state management.
+*   🖼️ **Asynchronous Image Loading:** Efficiently loads Pokémon images.
+*    natively for iOS with optimal performance.
 
-## 🚀 Installation
+### Screenshots
 
-1. Clone the repository:
-```bash
-git clone https://github.com/xDhii/PokeDex.git
-```
+*(Replace placeholders with actual high-resolution screenshots of your app)*
 
-2. Open the project in Xcode:
-```bash
-cd PokeDex
-open PokeDex.xcodeproj
-```
+| Home Screen (Grid & Search) | Pokemon Detail (Stats & Info) | Favorites Screen |
+|---|---|---|
+| `![Home Screen](placeholder_home_screen.png)` | `![Pokemon Detail](placeholder_detail_view.png)` | `![Favorites Screen](placeholder_favorites_screen.png)` |
 
-3. Build and run the project (⌘ + R)
+---
 
-## 🏗 Architecture
+## 🔌 API Integration: PokeAPI
 
-The app follows the MVVM pattern with clear separation of concerns:
+This application relies heavily on the [**PokeAPI (v2)**](https://pokeapi.co/) to fetch Pokémon data. The PokeAPI is a free and open-source RESTful API providing comprehensive data for the Pokémon universe.
 
-### Services Layer
-- **PokemonService**: Centralized service managing Pokémon data, favorites, and pagination
-- **NetworkService**: Handles all API communication with PokéAPI using singleton pattern
+*   **Base URL:** `https://pokeapi.co/api/v2/`
+*   **Primary Endpoint Used:** `/pokemon` (for listing and details)
+*   **Data Fetching:** The `NetworkService.swift` class handles the API requests using Swift's native `URLSession` with `async/await`. It fetches lists of Pokémon using pagination (`offset` and `limit` parameters) and retrieves detailed data for individual Pokémon.
+    *   Example List Fetch URL: `https://pokeapi.co/api/v2/pokemon?offset=0&limit=20`
+*   **Data Parsing:** Fetched JSON data is decoded into Swift `struct` models (defined in the `Models` directory, including DTOs) using `JSONDecoder`.
 
-### ViewModels Layer
-- **ContentViewModel**: Manages main screen state, search, filtering, and data binding
-- **DetailViewModel**: Handles detail view logic and Pokemon-specific operations
+For more details on the available endpoints and data structures, please refer to the [official PokeAPI v2 Documentation](https://pokeapi.co/docs/v2).
 
-### Views Layer
-- **ContentView**: Main grid view with search and filtering capabilities
-- **DetailView**: Comprehensive Pokémon detail screen with stats and actions
-- **PokemonCard**: Reusable card component for grid display
-- **Detail Components**: Modular UI components (Header, Types, Stats, etc.)
+---
 
-### Models Layer
-- **Pokemon**: Main Pokémon model with favorites state
-- **PokemonDetail**: Detailed information model
-- **DTOs**: Data Transfer Objects for API responses
+## 🏗️ Architecture & Project Structure
 
-### Project Structure
+The project strictly follows the **Model-View-ViewModel (MVVM)** pattern using `ObservableObject` for state management, ensuring a clean and maintainable codebase:
+
+*   **Model:** (`Models/`) Defines data structures (e.g., `Pokemon`, `PokemonDetail`, DTOs) mirroring API responses and app data.
+*   **View:** (`Views/`) SwiftUI views responsible for rendering the UI and capturing user interactions (e.g., `ContentView`, `DetailView`, `PokemonCard`). Views are kept declarative and reactive.
+*   **ViewModel:** (`ViewModels/`) Contains presentation logic, fetches data via Services, manages state using `@Published` properties, and handles user actions.
+*   **Service:** (`Services/`) Manages external interactions, primarily network requests (`NetworkService`, `PokemonService`) and data persistence (`UserDefaults` for favorites).
+*   **Utilities:** (`Utilities/`) Contains helper functions, extensions (`Color`, `String`, `View`), constants, and reusable components like `ImageLoader`.
+*   **Resources:** (`Resources/`) Includes assets (`Assets.xcassets`) and configuration files (`Info.plist`).
+
 ```
 PokeDex/
 ├── App/
@@ -131,83 +121,74 @@ PokeDex/
     └── Info.plist
 ```
 
-## 🔧 Configuration
+---
 
-The app uses PokéAPI with the following settings:
-- **Page Size**: 20 Pokémon per request
-- **Base URL**: https://pokeapi.co/api/v2/
-- **Pagination**: Infinite scroll with offset-based loading
-- **Caching**: Favorites stored locally with UserDefaults
-- **Search**: Real-time filtering with case-insensitive matching
+## 🛠️ Tech Stack
 
-## 📊 API Integration
-
-This app integrates with [PokéAPI v2](https://pokeapi.co/) to fetch:
-- **Pokemon List**: Paginated list with offset/limit parameters
-- **Pokemon Details**: Individual Pokémon information including:
-  - Physical characteristics (height/weight)
-  - Abilities and types
-  - Base stats (HP, Attack, Defense, etc.)
-  - Sprites and artwork
-
-### Error Handling
-- Network connectivity issues
-- Invalid API responses
-- Missing data graceful fallbacks
-
-## 🎯 Key Features Implementation
-
-### Infinite Scrolling
-- Automatic loading when user reaches near end of list
-- Loading states with progress indicators
-- Efficient memory management
-
-### Search & Filtering
-- Live search with instant results
-- Toggle between all Pokémon and favorites
-- Persistent search state
-
-### Favorites Management
-- Toggle favorite status with heart icon
-- Persistent storage across app launches
-- Synchronized state between views
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 Future Enhancements
-
-- [ ] Pokémon comparison feature
-- [ ] Offline support with Core Data
-- [ ] Enhanced animations and transitions
-- [ ] iPad support with adaptive layouts
-- [ ] Dark mode optimization
-- [ ] Pokémon evolution chain display
-- [ ] Advanced filtering (by type, generation, etc.)
-- [ ] Pokémon team builder
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [PokéAPI](https://pokeapi.co/) for providing the comprehensive Pokémon data
-- The Pokémon Company for the amazing Pokémon universe
-- Apple for SwiftUI and iOS development tools
-
-## 📞 Contact
-
-Adriano Valumin - [@xDhii](https://github.com/xDhii)
-
-Project Link: [https://github.com/xDhii/PokeDex](https://github.com/xDhii/PokeDx)
+*   **Language:** Swift 6.1+
+*   **Framework:** SwiftUI + Combine
+*   **Architecture:** MVVM with `ObservableObject` pattern
+*   **Networking:** URLSession with `async/await`
+*   **Data Persistence:** `UserDefaults` for favorites
+*   **State Management:** `@Published` properties with Combine bindings
+*   **API:** [PokeAPI v2](https://pokeapi.co/)
 
 ---
 
-<p align="center">Made with ❤️ and SwiftUI</p>
+## 📋 Requirements
+
+*   iOS 15.0+
+*   Xcode 16.4+
+*   Swift 6.1+
+
+---
+
+## 🚀 Installation & Setup
+
+To set up and run the project locally, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/xDhii/PokeDex.git
+    ```
+2.  **Navigate to the project directory:**
+    ```bash
+    cd PokeDex
+    ```
+3.  **Open the Xcode Project:**
+    Double-click the `PokeDex.xcodeproj` file.
+4.  **Select Target Device:**
+    Choose an iOS Simulator (e.g., iPhone 15 Pro) or connect a physical iOS device running iOS 15.0+.
+5.  **Build & Run:**
+    Press `Cmd + R` or click the Run button in Xcode.
+
+The application will build and launch on the selected device/simulator.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome and greatly appreciated! If you have suggestions for improvements or want to fix a bug:
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/YourAmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add YourAmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/YourAmazingFeature`)
+5.  Open a Pull Request
+
+Please ensure your code follows the project's coding style and includes relevant tests if applicable.
+
+---
+
+## 📄 License
+
+This project is distributed under the MIT License. See the `LICENSE` file for more information. (Note: Please add a `LICENSE` file to your repository if one doesn't exist).
+
+---
+
+## 📧 Contact
+
+Owner: **xDhii**
+
+Project Link: [https://github.com/xDhii/PokeDex](https://github.com/xDhii/PokeDex)
 
