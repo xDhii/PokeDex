@@ -27,6 +27,7 @@ struct PokemonTypesView: View {
                         .background(getBackgroundColor(type.name))
                         .foregroundColor(.white)
                         .clipShape(Capsule())
+                        .shadow(color: getBackgroundColor(type.name).opacity(0.5), radius: 4, x: 0, y: 1)
                 }
                 Spacer()
             }
@@ -34,7 +35,7 @@ struct PokemonTypesView: View {
         .padding()
         .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
     }
 }
 

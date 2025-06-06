@@ -1,9 +1,9 @@
-    //
-    //  ModernDetailView.swift
-    //  PokeDex
-    //
-    //  Created by Adriano Valumin on 20/05/25.
-    //
+//
+//  ModernDetailView.swift
+//  PokeDex
+//
+//  Created by Adriano Valumin on 20/05/25.
+//
 
 import SwiftUI
 
@@ -14,7 +14,7 @@ struct DetailView: View {
 
     var body: some View {
         ZStack {
-                // Background gradient
+            // Background gradient
             LinearGradient(
                 colors: [viewModel.backgroundColorPokemonType.opacity(0.3), viewModel.backgroundColorPokemonType.opacity(0.1)],
                 startPoint: .topLeading,
@@ -24,19 +24,19 @@ struct DetailView: View {
 
             ScrollView {
                 VStack(spacing: 24) {
-                        // Header Section
+                    // Header Section
                     PokemonHeaderView(
                         pokemon: pokemon,
                         backgroundColor: viewModel.backgroundColorPokemonType
                     )
 
-                        // Loading state
+                    // Loading state
                     if viewModel.isLoading {
                         ProgressView("Loading...")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
 
-                        // Types Section
+                    // Types Section
                     if let detail = viewModel.pokemonDetail {
                         PokemonTypesView(
                             types: detail.types,
@@ -44,7 +44,7 @@ struct DetailView: View {
                         )
                     }
 
-                        // Physical Characteristics
+                    // Physical Characteristics
                     if let detail = viewModel.pokemonDetail {
                         PokemonPhysicalView(
                             height: detail.height,
@@ -52,7 +52,7 @@ struct DetailView: View {
                         )
                     }
 
-                        // Abilities Section
+                    // Abilities Section
                     if let detail = viewModel.pokemonDetail {
                         PokemonAbilitiesView(
                             abilities: detail.abilities,
@@ -60,7 +60,7 @@ struct DetailView: View {
                         )
                     }
 
-                        // Stats Section
+                    // Stats Section
                     if let detail = viewModel.pokemonDetail {
                         PokemonStatsView(
                             stats: detail.stats,
@@ -97,7 +97,8 @@ struct DetailView: View {
         }
     }
 
-        // MARK: - Actions
+    // MARK: - Actions
+
     private func toggleFavorite() {
         viewModel.toggleFavorite(pokemon: pokemon)
     }

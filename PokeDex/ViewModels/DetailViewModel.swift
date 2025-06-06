@@ -5,9 +5,9 @@
 //  Created by Adriano Valumin on 05/06/25.
 //
 
+import Combine
 import Foundation
 import SwiftUI
-import Combine
 
 @MainActor
 class DetailViewModel: ObservableObject {
@@ -19,7 +19,8 @@ class DetailViewModel: ObservableObject {
     private let networkService = NetworkService.shared
     private let pokemonService = PokemonService.shared
 
-        // MARK: - Public Methods
+    // MARK: - Public Methods
+
     func fetchPokemonDetail(for pokemon: Pokemon) async {
         isLoading = true
         errorMessage = nil
@@ -45,7 +46,7 @@ class DetailViewModel: ObservableObject {
                 types: types
             )
 
-                // Update background color based on first type
+            // Update background color based on first type
             if let firstType = types.first {
                 backgroundColorPokemonType = getBackgroundColor(for: firstType.name)
             }
@@ -67,7 +68,8 @@ class DetailViewModel: ObservableObject {
 
     func getBackgroundColor(for type: String) -> Color {
         switch type.lowercased() {
-            case "bug", "grass":
+            case "bug",
+                 "grass":
                 return .green
             case "fire":
                 return .red
@@ -81,7 +83,8 @@ class DetailViewModel: ObservableObject {
                 return .brown
             case "flying":
                 return .orange
-            case "psychic", "fairy":
+            case "fairy",
+                 "psychic":
                 return .pink
             case "fighting":
                 return .red

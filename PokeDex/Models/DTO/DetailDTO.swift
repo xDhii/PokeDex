@@ -27,7 +27,7 @@ struct AbilityInfoDTO: Decodable {
 struct StatDTO: Decodable {
     let baseStat: Int
     let stat: StatInfoDTO
-    
+
     enum CodingKeys: String, CodingKey {
         case baseStat = "base_stat"
         case stat
@@ -41,7 +41,7 @@ struct StatInfoDTO: Decodable {
 struct SpritesDTO: Decodable {
     let frontDefault: String?
     let other: OtherSpritesDTO?
-    
+
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
         case other
@@ -50,7 +50,7 @@ struct SpritesDTO: Decodable {
 
 struct OtherSpritesDTO: Decodable {
     let officialArtwork: OfficialArtworkDTO?
-    
+
     enum CodingKeys: String, CodingKey {
         case officialArtwork = "official-artwork"
     }
@@ -58,7 +58,7 @@ struct OtherSpritesDTO: Decodable {
 
 struct OfficialArtworkDTO: Decodable {
     let frontDefault: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
     }

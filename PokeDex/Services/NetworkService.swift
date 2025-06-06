@@ -14,10 +14,12 @@ enum NetworkErrors: Error {
 
 class NetworkService {
     static let shared: NetworkService = NetworkService()
-    private init() {}
+    private init() { }
 
     func fetch(url: URL?) async throws -> Data {
-        guard let url else { throw NetworkErrors.url }
+        guard let url else {
+            throw NetworkErrors.url
+        }
         do {
             let (data, _) = try await URLSession.shared.data(for: .init(url: url))
             return data

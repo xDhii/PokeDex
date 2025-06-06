@@ -1,9 +1,9 @@
-    //
-    //  PokemonStatsView.swift
-    //  PokeDex
-    //
-    //  Created by Adriano Valumin on 05/06/25.
-    //
+//
+//  PokemonStatsView.swift
+//  PokeDex
+//
+//  Created by Adriano Valumin on 05/06/25.
+//
 
 import SwiftUI
 
@@ -66,7 +66,7 @@ struct PokemonStatsView: View {
         stats: [
             PokemonStat(name: "hp", baseStat: 35),
             PokemonStat(name: "attack", baseStat: 55),
-            PokemonStat(name: "defense", baseStat: 40)
+            PokemonStat(name: "defense", baseStat: 40),
         ],
         backgroundColor: .yellow
     )

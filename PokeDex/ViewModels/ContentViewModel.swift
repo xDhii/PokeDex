@@ -5,8 +5,8 @@
 //  Created by Adriano Valumin on 05/06/25.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 @MainActor
 class ContentViewModel: ObservableObject {
@@ -21,7 +21,7 @@ class ContentViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     init() {
-            // Bind service properties to ViewModel
+        // Bind service properties to ViewModel
         pokemonService.$pokemonList
             .assign(to: &$pokemons)
 
@@ -35,7 +35,8 @@ class ContentViewModel: ObservableObject {
             .assign(to: &$hasMorePages)
     }
 
-        // MARK: - Public Methods
+    // MARK: - Public Methods
+
     func loadPokemons() async {
         await pokemonService.loadPokemons()
     }
@@ -56,7 +57,8 @@ class ContentViewModel: ObservableObject {
         pokemonService.deletePokemon(pokemon: pokemon)
     }
 
-        // MARK: - Computed Properties
+    // MARK: - Computed Properties
+
     var filteredPokemons: [Pokemon] {
         let list = showingFavoritesOnly ? favoritePokemons : pokemons
 

@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BC6D940D2DF28C9A009146FD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BC6D940C2DF28C9A009146FD /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		BC5970DA2DC18AEF00DF4F25 /* PokeDex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeDex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC6D940C2DF28C9A009146FD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		BC5970D12DC18AEF00DF4F25 = {
 			isa = PBXGroup;
 			children = (
+				BC6D940C2DF28C9A009146FD /* README.md */,
 				BC5970DC2DC18AEF00DF4F25 /* PokeDex */,
 				BC5970DB2DC18AEF00DF4F25 /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC6D940D2DF28C9A009146FD /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

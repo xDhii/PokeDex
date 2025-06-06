@@ -10,7 +10,7 @@ import SwiftUI
 struct PokemonAbilitiesView: View {
     let abilities: [String]
     let backgroundColor: Color
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Abilities")
@@ -19,7 +19,7 @@ struct PokemonAbilitiesView: View {
 
             LazyVGrid(columns: [
                 GridItem(.flexible()),
-                GridItem(.flexible())
+                GridItem(.flexible()),
             ], spacing: 8) {
                 ForEach(abilities, id: \.self) { ability in
                     Text(ability.capitalized)
@@ -28,6 +28,7 @@ struct PokemonAbilitiesView: View {
                         .padding(.vertical, 8)
                         .background(backgroundColor.opacity(0.2))
                         .clipShape(Capsule())
+                        .shadow(color: backgroundColor.opacity(0.3), radius: 4, x: 0, y: 2)
                 }
             }
         }

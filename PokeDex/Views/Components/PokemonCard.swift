@@ -13,19 +13,20 @@ struct PokemonCard: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Pokemon image with gradient background
             ZStack {
-                // Gradient background
+                // MARK: - Gradient background
+
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color.blue.opacity(0.3),
-                        Color.purple.opacity(0.2)
+                        Color.purple.opacity(0.2),
                     ]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
 
-                // Pokemon image
+                // MARK: - Pokemon image
+
                 AsyncImage(url: pokemon.cover.image) { image in
                     image
                         .resizable()
@@ -41,12 +42,15 @@ struct PokemonCard: View {
                         )
                 }
 
-                // Favorite button
+                // MARK: - Favorite button
+
                 VStack {
                     HStack {
                         Spacer()
                         Button(action: {
-                            pokemonService.toggleFavorite(pokemon: pokemon)
+                            withAnimation {
+                                pokemonService.toggleFavorite(pokemon: pokemon)
+                            }
                         }) {
                             Image(systemName: pokemon.isFavorite ? "heart.fill" : "heart")
                                 .foregroundColor(pokemon.isFavorite ? .red : .white)
@@ -60,7 +64,8 @@ struct PokemonCard: View {
             }
             .frame(height: 120)
 
-            // Pokemon info
+            // MARK: - Pokemon info
+
             VStack(spacing: 4) {
                 Text(pokemon.data.name.capitalized)
                     .font(.system(size: 16, weight: .semibold))

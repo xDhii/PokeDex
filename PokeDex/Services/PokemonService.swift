@@ -5,8 +5,8 @@
 //  Created by Adriano Valumin on 05/06/25.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 @MainActor
 class PokemonService: ObservableObject {
@@ -28,7 +28,9 @@ class PokemonService: ObservableObject {
     // MARK: - Public Methods
 
     func loadPokemons() async {
-        guard !isLoading && hasMorePages else { return }
+        guard !isLoading && hasMorePages else {
+            return
+        }
 
         isLoading = true
 

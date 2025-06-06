@@ -9,23 +9,41 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
+    @Environment(\.horizontalSizeClass) private var sizeClass
+
+    private var numberOfColumns: Int {
+        return sizeClass == .compact ? 2 : 3
+    }
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                    // Header with logo and filters
+                // MARK: - Header with logo and filters
+
                 VStack(spacing: 16) {
                     Image("pokemonLogo")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 60)
 
-                        // Search and filter controls
+                    // MARK: - Search and filter controls
+
                     HStack {
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
-                            TextField("Procurar Pokémon...", text: $viewModel.searchText)
+                            TextField("Search Pokémon...", text: $viewModel.searchText)
+
+                            if !viewModel.searchText.isEmpty {
+                                Button {
+                                    withAnimation {
+                                        viewModel.searchText = ""
+                                    }
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.gray)
+                                }
+                            }
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
@@ -33,11 +51,13 @@ struct ContentView: View {
                         .cornerRadius(10)
 
                         Button(action: {
-                            viewModel.showingFavoritesOnly.toggle()
+                            withAnimation {
+                                viewModel.showingFavoritesOnly.toggle()
+                            }
                         }) {
                             HStack {
                                 Image(systemName: viewModel.showingFavoritesOnly ? "heart.fill" : "heart")
-                                Text(viewModel.showingFavoritesOnly ? "Todos" : "Favoritos")
+                                Text(viewModel.showingFavoritesOnly ? "All" : "Favorites")
                                     .font(.caption)
                             }
                             .foregroundColor(viewModel.showingFavoritesOnly ? .red : .blue)
@@ -52,12 +72,16 @@ struct ContentView: View {
                 .padding(.bottom, 16)
                 .background(Color(.systemBackground))
 
-                    // Pokemon grid with infinite scrolling
+                // MARK: - Pokemon grid with infinite scrolling
+
                 ScrollView {
-                    LazyVGrid(columns: [
-                        GridItem(.flexible(), spacing: 8),
-                        GridItem(.flexible(), spacing: 8)
-                    ], spacing: 12) {
+                    LazyVGrid(
+                        columns: Array(
+                            repeating: GridItem(.flexible(), spacing: 8),
+                            count: numberOfColumns
+                        ),
+                        spacing: 12
+                    ) {
                         ForEach(viewModel.filteredPokemons) { pokemon in
                             NavigationLink(destination: DetailView(pokemon: pokemon)) {
                                 PokemonCard(pokemon: pokemon)
@@ -70,17 +94,20 @@ struct ContentView: View {
                             }
                         }
 
-                            // Loading indicator at the bottom
+                        // MARK: - Loading indicator at the bottom
+
                         if viewModel.isLoading {
                             HStack {
                                 Spacer()
-                                ProgressView("Carregando mais Pokémons...")
+                                ProgressView("Loading more Pokémons...")
                                     .foregroundColor(.secondary)
                                     .font(.caption)
                                 Spacer()
                             }
                             .padding()
-                            .gridCellColumns(2) // Spans both columns
+                            .gridCellColumns(
+                                numberOfColumns
+                            ) // Spans both columns
                         }
                     }
                     .padding(.horizontal, 16)

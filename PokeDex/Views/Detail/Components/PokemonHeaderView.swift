@@ -21,7 +21,16 @@ struct PokemonHeaderView: View {
             .frame(width: 200, height: 200)
             .background(
                 Circle()
-                    .fill(backgroundColor.opacity(0.2))
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color.gray.opacity(0.1),
+                                backgroundColor.opacity(0.4),
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .shadow(color: backgroundColor.opacity(0.3), radius: 10, x: 0, y: 5)
             )
 
