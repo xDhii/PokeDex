@@ -7,18 +7,16 @@
 
 import SwiftUI
 
-struct ModernDetailView: View {
-    var pokemon: Pokemon
-    @State var detail: PokemonDetail?
-    @State var backgroundColorPokemonType: Color = .gray
-    @ObservedObject private var pokemonManager = PokemonManager.shared
+struct DetailView: View {
+    let pokemon: Pokemon
+    @StateObject private var viewModel = DetailViewModel()
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
-            // Background gradient
+                // Background gradient
             LinearGradient(
-                colors: [backgroundColorPokemonType.opacity(0.3), backgroundColorPokemonType.opacity(0.1)],
+                colors: [viewModel.backgroundColorPokemonType.opacity(0.3), viewModel.backgroundColorPokemonType.opacity(0.1)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -26,26 +24,32 @@ struct ModernDetailView: View {
 
             ScrollView {
                 VStack(spacing: 24) {
-                    // Header Section
+                        // Header Section
                     headerSection
 
-                    // Types Section
-                    if let detail {
+                        // Loading state
+                    if viewModel.isLoading {
+                        ProgressView("Loading...")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+
+                        // Types Section
+                    if let detail = viewModel.pokemonDetail {
                         typesSection(types: detail.types)
                     }
 
-                    // Physical Characteristics
-                    if let detail {
+                        // Physical Characteristics
+                    if let detail = viewModel.pokemonDetail {
                         physicalCharacteristicsSection(detail: detail)
                     }
 
-                    // Abilities Section
-                    if let detail {
+                        // Abilities Section
+                    if let detail = viewModel.pokemonDetail {
                         abilitiesSection(abilities: detail.abilities)
                     }
 
-                    // Stats Section
-                    if let detail {
+                        // Stats Section
+                    if let detail = viewModel.pokemonDetail {
                         statsSection(stats: detail.stats)
                     }
                 }
@@ -73,12 +77,12 @@ struct ModernDetailView: View {
         }
         .onAppear {
             Task {
-                await fetchPokemonDetail()
+                await viewModel.fetchPokemonDetail(for: pokemon)
             }
         }
     }
 
-    // MARK: - Header Section
+        // MARK: - Header Section
     private var headerSection: some View {
         VStack(spacing: 16) {
             AsyncImage(url: pokemon.cover.image) { image in
@@ -89,8 +93,8 @@ struct ModernDetailView: View {
             .frame(width: 200, height: 200)
             .background(
                 Circle()
-                    .fill(backgroundColorPokemonType.opacity(0.2))
-                    .shadow(color: backgroundColorPokemonType.opacity(0.3), radius: 10, x: 0, y: 5)
+                    .fill(viewModel.backgroundColorPokemonType.opacity(0.2))
+                    .shadow(color: viewModel.backgroundColorPokemonType.opacity(0.3), radius: 10, x: 0, y: 5)
             )
 
             Text(pokemon.data.name.capitalized)
@@ -101,7 +105,7 @@ struct ModernDetailView: View {
         .padding(.top)
     }
 
-    // MARK: - Types Section
+        // MARK: - Types Section
     private func typesSection(types: [PokemonDetailTypes]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Types")
@@ -115,7 +119,7 @@ struct ModernDetailView: View {
                         .fontWeight(.medium)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
-                        .background(checkBackgroundColor(type: type.name))
+                        .background(viewModel.getBackgroundColor(for: type.name))
                         .foregroundColor(.white)
                         .clipShape(Capsule())
                 }
@@ -128,7 +132,7 @@ struct ModernDetailView: View {
         .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
 
-    // MARK: - Physical Characteristics Section
+        // MARK: - Physical Characteristics Section
     private func physicalCharacteristicsSection(detail: PokemonDetail) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Physical Characteristics")
@@ -166,7 +170,7 @@ struct ModernDetailView: View {
         .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
 
-    // MARK: - Abilities Section
+        // MARK: - Abilities Section
     private func abilitiesSection(abilities: [String]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Abilities")
@@ -182,7 +186,7 @@ struct ModernDetailView: View {
                         .font(.subheadline)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
-                        .background(backgroundColorPokemonType.opacity(0.2))
+                        .background(viewModel.backgroundColorPokemonType.opacity(0.2))
                         .clipShape(Capsule())
                 }
             }
@@ -193,7 +197,7 @@ struct ModernDetailView: View {
         .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
 
-    // MARK: - Stats Section
+        // MARK: - Stats Section
     private func statsSection(stats: [PokemonStat]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Base Stats")
@@ -222,7 +226,7 @@ struct ModernDetailView: View {
                 Text("\(stat.baseStat)")
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundColor(backgroundColorPokemonType)
+                    .foregroundColor(viewModel.backgroundColorPokemonType)
             }
 
             GeometryReader { geometry in
@@ -233,7 +237,7 @@ struct ModernDetailView: View {
                         .clipShape(Capsule())
 
                     Rectangle()
-                        .fill(backgroundColorPokemonType)
+                        .fill(viewModel.backgroundColorPokemonType)
                         .frame(width: min(geometry.size.width * (CGFloat(stat.baseStat) / 255.0), geometry.size.width), height: 6)
                         .clipShape(Capsule())
                         .animation(.easeInOut(duration: 0.5), value: stat.baseStat)
@@ -243,93 +247,21 @@ struct ModernDetailView: View {
         }
     }
 
-    // MARK: - Actions
+        // MARK: - Actions
     private func toggleFavorite() {
-        pokemonManager.toggleFavorite(pokemon: pokemon)
+        viewModel.toggleFavorite(pokemon: pokemon)
     }
 
     private func deletePokemon() {
-        pokemonManager.deletePokemon(pokemon: pokemon)
+        viewModel.deletePokemon(pokemon: pokemon)
         dismiss()
-    }
-
-    // MARK: - Data Fetching
-    private func fetchPokemonDetail() async {
-        do {
-            let pokemonDetail = try await Network.shared.fetchDetail(name: pokemon.data.name)
-
-            let types = pokemonDetail.types.map { detail in
-                PokemonDetailTypes(name: detail.type.name)
-            }
-
-            let abilities = pokemonDetail.abilities.map { $0.ability.name }
-
-            let stats = pokemonDetail.stats.map { stat in
-                PokemonStat(name: stat.stat.name, baseStat: stat.baseStat)
-            }
-
-            detail = PokemonDetail(
-                height: pokemonDetail.height,
-                weight: pokemonDetail.weight,
-                abilities: abilities,
-                stats: stats,
-                types: types
-            )
-
-            if let firstType = types.first {
-                backgroundColorPokemonType = checkBackgroundColor(type: firstType.name)
-            }
-        } catch {
-            print("Error fetching Pokémon detail: \(error)")
-        }
-    }
-
-    func checkBackgroundColor(type: String) -> Color {
-        switch type {
-            case "bug", "grass":
-                return .green
-            case "fire":
-                return .red
-            case "electric":
-                return .yellow
-            case "water":
-                return .blue
-            case "poison":
-                return .purple
-            case "ground":
-                return .brown
-            case "flying":
-                return .orange
-            case "psychic":
-                return .pink
-            case "fairy":
-                return .pink
-            case "fighting":
-                return .red
-            case "normal":
-                return .gray
-            case "rock":
-                return .brown
-            case "steel":
-                return .gray
-            case "ice":
-                return .cyan
-            case "ghost":
-                return .purple
-            case "dragon":
-                return .blue
-            case "dark":
-                return .black
-            default:
-                return .gray
-        }
     }
 }
 
 #Preview {
     NavigationView {
-        ModernDetailView(
-            pokemon: .init(data: .init(name: "Ivysaur"), cover: .init(indexImage: 25))
+        DetailView(
+            pokemon: Pokemon(data: PokemonDTO(name: "Ivysaur"), cover: PokemonCover(indexImage: 25))
         )
     }
 }

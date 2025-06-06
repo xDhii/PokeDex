@@ -8,36 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var pokemonManager = PokemonManager.shared
-    @State private var showingFavoritesOnly = false
-    @State private var searchText = ""
-
-    var filteredPokemons: [Pokemon] {
-        let pokemons = showingFavoritesOnly ? pokemonManager.favoritePokemons : pokemonManager.pokemonList
-
-        if searchText.isEmpty {
-            return pokemons
-        } else {
-            return pokemons.filter { $0.data.name.localizedCaseInsensitiveContains(searchText) }
-        }
-    }
+    @StateObject private var viewModel = ContentViewModel()
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Header with logo and filters
+                    // Header with logo and filters
                 VStack(spacing: 16) {
                     Image("pokemonLogo")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 60)
 
-                    // Search and filter controls
+                        // Search and filter controls
                     HStack {
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
-                            TextField("Procurar Pokémon...", text: $searchText)
+                            TextField("Procurar Pokémon...", text: $viewModel.searchText)
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
@@ -45,17 +33,17 @@ struct ContentView: View {
                         .cornerRadius(10)
 
                         Button(action: {
-                            showingFavoritesOnly.toggle()
+                            viewModel.showingFavoritesOnly.toggle()
                         }) {
                             HStack {
-                                Image(systemName: showingFavoritesOnly ? "heart.fill" : "heart")
-                                Text(showingFavoritesOnly ? "Todos" : "Favoritos")
+                                Image(systemName: viewModel.showingFavoritesOnly ? "heart.fill" : "heart")
+                                Text(viewModel.showingFavoritesOnly ? "Todos" : "Favoritos")
                                     .font(.caption)
                             }
-                            .foregroundColor(showingFavoritesOnly ? .red : .blue)
+                            .foregroundColor(viewModel.showingFavoritesOnly ? .red : .blue)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
-                            .background(showingFavoritesOnly ? Color.red.opacity(0.1) : Color.blue.opacity(0.1))
+                            .background(viewModel.showingFavoritesOnly ? Color.red.opacity(0.1) : Color.blue.opacity(0.1))
                             .cornerRadius(10)
                         }
                     }
@@ -64,26 +52,26 @@ struct ContentView: View {
                 .padding(.bottom, 16)
                 .background(Color(.systemBackground))
 
-                // Pokemon grid with infinite scrolling
+                    // Pokemon grid with infinite scrolling
                 ScrollView {
                     LazyVGrid(columns: [
                         GridItem(.flexible(), spacing: 8),
                         GridItem(.flexible(), spacing: 8)
                     ], spacing: 12) {
-                        ForEach(filteredPokemons) { pokemon in
-                            NavigationLink(destination: ModernDetailView(pokemon: pokemon)) {
+                        ForEach(viewModel.filteredPokemons) { pokemon in
+                            NavigationLink(destination: DetailView(pokemon: pokemon)) {
                                 ModernPokemonCard(pokemon: pokemon)
                             }
                             .buttonStyle(PlainButtonStyle())
                             .onAppear {
                                 Task {
-                                    await pokemonManager.loadMorePokemonsIfNeeded(for: pokemon)
+                                    await viewModel.loadMorePokemonsIfNeeded(for: pokemon)
                                 }
                             }
                         }
 
-                        // Loading indicator at the bottom
-                        if pokemonManager.isLoading {
+                            // Loading indicator at the bottom
+                        if viewModel.isLoading {
                             HStack {
                                 Spacer()
                                 ProgressView("Carregando mais Pokémons...")
@@ -98,13 +86,13 @@ struct ContentView: View {
                     .padding(.horizontal, 16)
                 }
                 .refreshable {
-                    pokemonManager.resetPagination()
-                    await pokemonManager.loadPokemons()
+                    viewModel.resetPagination()
+                    await viewModel.loadPokemons()
                 }
             }
             .navigationBarHidden(true)
             .task {
-                await pokemonManager.loadPokemons()
+                await viewModel.loadPokemons()
             }
         }
     }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ModernPokemonCard: View {
     let pokemon: Pokemon
-    @StateObject private var pokemonManager = PokemonManager.shared
+    @StateObject private var pokemonService = PokemonService.shared
 
     var body: some View {
         VStack(spacing: 0) {
@@ -46,7 +46,7 @@ struct ModernPokemonCard: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            pokemonManager.toggleFavorite(pokemon: pokemon)
+                            pokemonService.toggleFavorite(pokemon: pokemon)
                         }) {
                             Image(systemName: pokemon.isFavorite ? "heart.fill" : "heart")
                                 .foregroundColor(pokemon.isFavorite ? .red : .white)

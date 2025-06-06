@@ -8,6 +8,6 @@
 import Foundation
 
 struct PokemonDetailTypes: Identifiable {
-    var id: UUID = UUID()
+    let id = UUID()
     let name: String
 }

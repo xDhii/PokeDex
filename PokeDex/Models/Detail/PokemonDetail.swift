@@ -34,9 +34,3 @@ struct PokemonDetail: Identifiable {
         self.types = types
     }
 }
-
-struct PokemonStat: Identifiable {
-    let id = UUID()
-    let name: String
-    let baseStat: Int
-}

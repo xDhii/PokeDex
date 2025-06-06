@@ -12,8 +12,8 @@ enum NetworkErrors: Error {
     case request
 }
 
-class Network {
-    static let shared: Network = Network()
+class NetworkService {
+    static let shared: NetworkService = NetworkService()
     private init() {}
 
     func fetch(url: URL?) async throws -> Data {
