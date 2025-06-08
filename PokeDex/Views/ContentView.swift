@@ -122,7 +122,7 @@ struct ContentView: View {
                                         )
                                     }
                                 }
-                                .padding(.top, 2)
+                                .padding(.top, 10)
                                 .padding(.horizontal, 16)
                             }
                             .scrollIndicators(.hidden)
