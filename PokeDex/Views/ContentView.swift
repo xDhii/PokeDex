@@ -25,6 +25,7 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 60)
+                        .shadow(color: .yellow.opacity(0.4), radius: 13, x: 0, y: 0)
 
                     // MARK: - Search and filter controls
 
@@ -107,7 +108,7 @@ struct ContentView: View {
                             .padding()
                             .gridCellColumns(
                                 numberOfColumns
-                            ) // Spans both columns
+                            )
                         }
                     }
                     .padding(.horizontal, 16)

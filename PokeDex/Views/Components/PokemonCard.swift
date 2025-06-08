@@ -48,9 +48,7 @@ struct PokemonCard: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            withAnimation {
-                                pokemonService.toggleFavorite(pokemon: pokemon)
-                            }
+                            withAnimation { pokemonService.toggleFavorite(pokemon: pokemon) }
                         }) {
                             Image(systemName: pokemon.isFavorite ? "heart.fill" : "heart")
                                 .foregroundColor(pokemon.isFavorite ? .red : .white)
@@ -79,7 +77,8 @@ struct PokemonCard: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity)
-            .background(Color(.systemBackground))
+//            .background(Color(.systemBackground))
+            .background(.ultraThinMaterial)
         }
         .background(Color(.systemBackground))
         .cornerRadius(16)

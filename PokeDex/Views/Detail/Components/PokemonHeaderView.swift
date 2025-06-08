@@ -17,6 +17,7 @@ struct PokemonHeaderView: View {
                 image.image?
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .scaleEffect(1.18)
             }
             .frame(width: 200, height: 200)
             .background(
