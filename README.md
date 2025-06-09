@@ -42,7 +42,7 @@ The project emphasizes clean code, scalability, and modern iOS development pract
 
 | Home Screen (Grid & Search) | Pokemon Detail (Stats & Info) | Favorites Screen |
 |---|---|---|
-| ![image](https://github.com/user-attachments/assets/37e944ad-8db3-4c6b-8cd7-5300cd33ef97) | ![image](https://github.com/user-attachments/assets/b7695037-bfaf-4db0-b8b3-86ac7279da4a) | ![image](https://github.com/user-attachments/assets/b79ac892-18e6-4f75-a59f-d35703dfeaed) |
+| ![image](https://github.com/user-attachments/assets/726aecf6-8c09-4d3c-b6de-a627612869f5) | ![image](https://github.com/user-attachments/assets/1a8d4e8d-7385-4e55-a20a-ea30ffd5763c) | ![image](https://github.com/user-attachments/assets/79dcb3b8-1f6d-4cc9-939c-1212b26ad856) |
 
 ---
 
