@@ -94,7 +94,6 @@ struct DetailView: View {
                             .font(.title2)
                     }
                 }
-                .glassEffect(in: .capsule)
             }
         }
         .onAppear {
