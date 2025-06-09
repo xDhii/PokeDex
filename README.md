@@ -2,8 +2,8 @@
 # ✨ PokeDex iOS App ✨
 
 [![Swift Version](https://img.shields.io/badge/Swift-6.1%2B-orange.svg)](https://swift.org)
-[![Platform](https://img.shields.io/badge/platform-iOS%2018.0%2B-lightgrey.svg)](https://developer.apple.com/ios/)
-[![Xcode Version](https://img.shields.io/badge/Xcode-16.4%2B-blue.svg)](https://developer.apple.com/xcode/)
+[![Platform](https://img.shields.io/badge/platform-iOS%2026.0%2B-lightgrey.svg)](https://developer.apple.com/ios/)
+[![Xcode Version](https://img.shields.io/badge/Xcode-26.0%2B-blue.svg)](https://developer.apple.com/xcode/)
 [![Architecture](https://img.shields.io/badge/Architecture-MVVM%20(ObservableObject)-blueviolet.svg)](https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app)
 [![API](https://img.shields.io/badge/API-PokeAPI%20v2-red.svg)](https://pokeapi.co/)
 [![UI Framework](https://img.shields.io/badge/UI-SwiftUI%20%26%20Combine-green.svg)](https://developer.apple.com/documentation/swiftui)
