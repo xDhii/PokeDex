@@ -24,19 +24,22 @@ struct DetailView: View {
 
             ScrollView {
                 VStack(spacing: 24) {
-                    // Header Section
+                    // MARK: - Header Section
+
                     PokemonHeaderView(
                         pokemon: pokemon,
                         backgroundColor: viewModel.backgroundColorPokemonType
                     )
 
-                    // Loading state
+                    // MARK: - Loading state
+
                     if viewModel.isLoading {
                         ProgressView("Loading...")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
 
-                    // Types Section
+                    // MARK: - Types Section
+
                     if let detail = viewModel.pokemonDetail {
                         PokemonTypesView(
                             types: detail.types,
@@ -44,7 +47,8 @@ struct DetailView: View {
                         )
                     }
 
-                    // Physical Characteristics
+                    // MARK: - Physical Characteristics
+
                     if let detail = viewModel.pokemonDetail {
                         PokemonPhysicalView(
                             height: detail.height,
@@ -52,7 +56,8 @@ struct DetailView: View {
                         )
                     }
 
-                    // Abilities Section
+                    // MARK: - Abilities Section
+
                     if let detail = viewModel.pokemonDetail {
                         PokemonAbilitiesView(
                             abilities: detail.abilities,
@@ -60,7 +65,8 @@ struct DetailView: View {
                         )
                     }
 
-                    // Stats Section
+                    // MARK: - Stats Section
+
                     if let detail = viewModel.pokemonDetail {
                         PokemonStatsView(
                             stats: detail.stats,
