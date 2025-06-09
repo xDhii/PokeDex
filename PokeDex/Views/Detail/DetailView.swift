@@ -74,7 +74,7 @@ struct DetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 HStack {
                     Button(action: toggleFavorite) {
                         Image(systemName: pokemon.isFavorite ? "heart.fill" : "heart")
@@ -88,6 +88,7 @@ struct DetailView: View {
                             .font(.title2)
                     }
                 }
+                .glassEffect(in: .capsule)
             }
         }
         .onAppear {

@@ -24,7 +24,8 @@ struct PokemonTypesView: View {
                         .fontWeight(.medium)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
-                        .background(getBackgroundColor(type.name))
+                        .background(getBackgroundColor(type.name).opacity(0.9))
+                        .glassEffect(in: .capsule)
                         .foregroundColor(.white)
                         .clipShape(Capsule())
                         .shadow(color: getBackgroundColor(type.name).opacity(0.5), radius: 4, x: 0, y: 1)
@@ -33,7 +34,8 @@ struct PokemonTypesView: View {
             }
         }
         .padding()
-        .background(Color(.systemBackground))
+        .background(Color(.systemBackground).opacity(0.3))
+        .glassEffect(in: .rect)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
     }
