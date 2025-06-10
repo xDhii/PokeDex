@@ -51,24 +51,6 @@ struct ContentView: View {
                         .padding(.vertical, 8)
                         .background(Color(.systemGray6))
                         .cornerRadius(10)
-
-                        Button(action: {
-                            withAnimation {
-                                viewModel.showingFavoritesOnly.toggle()
-                            }
-                        }) {
-                            HStack {
-                                Image(systemName: viewModel.showingFavoritesOnly ? "heart.fill" : "heart")
-                                Text(viewModel.showingFavoritesOnly ? "All" : "Favorites")
-                                    .font(.caption)
-                            }
-                            .foregroundColor(viewModel.showingFavoritesOnly ? .red : .blue)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(viewModel.showingFavoritesOnly ? Color.red.opacity(0.1) : Color.blue.opacity(0.1))
-                            .cornerRadius(10)
-                        }
-                        .padding(.trailing, 2)
                     }
                     .background(Color(.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -131,6 +113,31 @@ struct ContentView: View {
                                 await viewModel.loadPokemons()
                             }
                         }
+
+                    // MARK: - Floating favorites filter button
+
+                    VStack {
+                        Spacer()
+                        GlassEffectContainer {
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                                        viewModel.showingFavoritesOnly.toggle()
+                                    }
+                                }) {
+                                    Image(systemName: viewModel.showingFavoritesOnly ? "heart.fill" : "heart")
+                                        .foregroundColor(.red)
+                                        .frame(width: 56, height: 56)
+                                }
+                                .scaleEffect(viewModel.showingFavoritesOnly ? 1.1 : 1.0)
+                                .glassEffect()
+                                .animation(.spring(response: 0.4, dampingFraction: 0.6), value: viewModel.showingFavoritesOnly)
+                                .padding(.trailing, 12)
+                                .padding(.bottom, 12)
+                            }
+                        }
+                    }
                 }
             }
             .navigationBarHidden(true)
