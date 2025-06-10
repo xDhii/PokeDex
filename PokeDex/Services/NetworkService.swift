@@ -12,6 +12,7 @@ enum NetworkErrors: Error {
     case request
 }
 
+@MainActor
 class NetworkService {
     static let shared: NetworkService = NetworkService()
     private init() { }
