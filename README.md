@@ -1,7 +1,7 @@
 
 # ✨ PokeDex iOS App ✨
 
-[![Swift Version](https://img.shields.io/badge/Swift-6.1%2B-orange.svg)](https://swift.org)
+[![Swift Version](https://img.shields.io/badge/Swift-6.2%2B-orange.svg)](https://swift.org)
 [![Platform](https://img.shields.io/badge/platform-iOS%2026.0%2B-lightgrey.svg)](https://developer.apple.com/ios/)
 [![Xcode Version](https://img.shields.io/badge/Xcode-26.0%2B-blue.svg)](https://developer.apple.com/xcode/)
 [![Architecture](https://img.shields.io/badge/Architecture-MVVM%20(ObservableObject)-blueviolet.svg)](https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app)
@@ -123,7 +123,7 @@ PokeDex/
 
 ## 🛠️ Tech Stack
 
-*   **Language:** Swift 6.1+
+*   **Language:** Swift 6.2+
 *   **Framework:** SwiftUI + Combine
 *   **Architecture:** MVVM with `ObservableObject` pattern
 *   **Networking:** URLSession with `async/await`
@@ -137,7 +137,7 @@ PokeDex/
 
 *   iOS 26.0+
 *   Xcode 26.0+
-*   Swift 6.1+
+*   Swift 6.2+
 
 ---
 
@@ -156,7 +156,7 @@ To set up and run the project locally, follow these steps:
 3.  **Open the Xcode Project:**
     Double-click the `PokeDex.xcodeproj` file.
 4.  **Select Target Device:**
-    Choose an iOS Simulator (e.g., iPhone 15 Pro) or connect a physical iOS device running iOS 15.0+.
+    Choose an iOS Simulator (e.g., iPhone 16 Pro) or connect a physical iOS device running iOS 26.0+.
 5.  **Build & Run:**
     Press `Cmd + R` or click the Run button in Xcode.
 
