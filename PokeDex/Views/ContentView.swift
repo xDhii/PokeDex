@@ -49,7 +49,7 @@ struct ContentView: View {
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
-                        .background(Color(.systemGray6))
+                        .background(Color(.systemBackground))
                         .cornerRadius(10)
                     }
                     .background(Color(.systemBackground))
@@ -116,9 +116,9 @@ struct ContentView: View {
 
                     // MARK: - Floating favorites filter button
 
+                    GlassEffectContainer {
                     VStack {
                         Spacer()
-                        GlassEffectContainer {
                             HStack {
                                 Spacer()
                                 Button(action: {
