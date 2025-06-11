@@ -7,20 +7,32 @@
 
 import SwiftUI
 
-struct BackgroundView: View {
+struct BackgroundView<Content: View>: View {
+    let content: Content
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
     var body: some View {
         ZStack {
             Color.red
                 .ignoresSafeArea()
 
             RoundedRectangle(cornerRadius: 13)
-                .padding()
+                .padding(.horizontal, 6)
+                .padding(.bottom, -50)
                 .foregroundStyle(.white)
                 .background(.red)
+                .overlay {
+                    content
+                }
         }
     }
 }
 
 #Preview {
-    BackgroundView()
+    BackgroundView {
+        Text("Example content")
+    }
 }

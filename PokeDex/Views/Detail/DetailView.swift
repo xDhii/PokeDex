@@ -14,7 +14,8 @@ struct DetailView: View {
 
     var body: some View {
         ZStack {
-            // Background gradient
+            // MARK: - Background gradient
+
             LinearGradient(
                 colors: [viewModel.backgroundColorPokemonType.opacity(0.3), viewModel.backgroundColorPokemonType.opacity(0.1)],
                 startPoint: .topLeading,
