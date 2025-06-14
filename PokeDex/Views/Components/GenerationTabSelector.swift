@@ -6,82 +6,74 @@ struct GenerationTabSelector: View {
     let generations = Array(1 ... 9)
 
     var body: some View {
-        GlassEffectContainer {
-            ZStack(alignment: .bottomTrailing) {
-                // Transparent background to capture user input/touch to cloase the selector
-                if isExpanded {
-                    Color.black.opacity(0.001)
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            withAnimation(.spring(duration: 0.3)) {
-                                isExpanded = false
+        ZStack(alignment: .bottomTrailing) {
+            // Generation selector popup
+            if isExpanded {
+                VStack(spacing: 0) {
+                    ForEach(generations, id: \.self) { gen in
+                        Button(action: {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                selectedGeneration = gen
                             }
-                        }
-                }
+                        }) {
+                            HStack {
+                                Text("Gen \(gen)")
+                                    .font(.system(size: 17, weight: selectedGeneration == gen ? .semibold : .regular))
+                                    .foregroundStyle(selectedGeneration == gen ? Color.accentColor : Color.primary)
 
-                // Gen selector (visible only when isExpanded = true)
-                if isExpanded {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 8) {
-                            ForEach(generations, id: \.self) { gen in
-                                Button(action: {
-                                    withAnimation(.spring(duration: 0.3)) {
-                                        selectedGeneration = gen
-                                        isExpanded = false
-                                    }
-                                }) {
-                                    Text("Gen \(gen)")
-                                        .fontWeight(selectedGeneration == gen ? .bold : .regular)
-                                        //                                    .foregroundColor(selectedGeneration == gen ? .white : .primary)
-                                        .padding(.vertical, 10)
-                                        .frame(width: 70)
-                                        //                                    .background(
-                                        //                                        selectedGeneration == gen
-                                        //                                            ? Color.accentColor.opacity(0.7)
-                                        //                                            : Color.clear
-                                        //                                    )
-                                        .clipShape(Capsule())
+                                Spacer()
+
+                                if selectedGeneration == gen {
+                                    Image(systemName: "checkmark")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundStyle(Color.accentColor)
                                 }
-                                .glassEffect()
                             }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 12)
                         }
 
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 8)
+                        if gen < generations.last! {
+                            Divider()
+                                .background(Color.primary.opacity(0.1))
+                        }
+                    }
+                }
+                .glassEffect(in: .rect)
+                .frame(width: 280)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .padding(.bottom, 70)
+                .padding(.horizontal, 20)
+                .transition(
+                    .asymmetric(
+                        insertion: .scale(scale: 0.8, anchor: .bottomTrailing)
+                            .combined(with: .opacity),
+                        removal: .scale(scale: 0.95, anchor: .bottomTrailing)
+                            .combined(with: .opacity)
+                    )
+                )
+            }
+
+            // Floating action button
+            VStack {
+                HStack {
+                    Spacer()
+
+                    Button {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                            isExpanded.toggle()
+                        }
+                    } label: {
+                        ZStack {
+                            Image(systemName: isExpanded ? "xmark" : "line.3.horizontal.decrease")
+                                .frame(width: 56, height: 56)
+                                .font(.system(size: 20, weight: .medium))
+                                .foregroundStyle(Color.primary)
+                                .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                                .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isExpanded)
+                        }
                     }
                     .glassEffect()
-                    .frame(width: 320)
-                    .clipShape(Capsule())
-                    .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
-                    .padding(.horizontal, 32)
-                    .padding(.bottom, 80) // Space for other buttons
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-
-                // Circle button always visible
-                Button {
-                    withAnimation(.spring(duration: 0.3)) {
-                        isExpanded.toggle()
-                    }
-                } label: {
-                    HStack {
-                        Spacer()
-
-                        ZStack {
-//                            GlassEffectContainer {
-                            Circle()
-                                .frame(width: 56, height: 56)
-                                .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
-
-                            Image(systemName: isExpanded ? "chevron.down" : "line.3.horizontal.decrease")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundStyle(Color.primary)
-                                .scaleEffect(isExpanded ? 1.2 : 1.0)
-                                .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isExpanded)
-//                            }
-                        }
-//                        .glassEffect()
-                    }
                 }
             }
         }
@@ -90,13 +82,16 @@ struct GenerationTabSelector: View {
 
 #Preview {
     ZStack {
-        Color.red.opacity(0.2).ignoresSafeArea()
-        VStack {
-            Spacer()
-            GenerationTabSelector(
-                selectedGeneration: .constant(2),
-                isExpanded: .constant(true)
-            )
-        }
+        LinearGradient(
+            colors: [Color.blue.opacity(0.8), Color.purple.opacity(0.8)],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
+
+        GenerationTabSelector(
+            selectedGeneration: .constant(2),
+            isExpanded: .constant(true)
+        )
     }
 }
