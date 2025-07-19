@@ -3,22 +3,28 @@ import SwiftUI
 struct SearchBar: View {
     @Binding var searchText: String
 
+    var clearSearchFieldButton: some View {
+        Button {
+            withAnimation {
+                searchText = ""
+            }
+        } label: {
+            Image(systemName: "xmark.circle.fill")
+                .foregroundColor(.gray)
+        }
+        .accessibilityIdentifier("clearSearchFieldButton")
+    }
+    
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
 
             TextField("Search Pokémon...", text: $searchText)
+                .accessibilityIdentifier("searchTextField")
 
             if !searchText.isEmpty {
-                Button {
-                    withAnimation {
-                        searchText = ""
-                    }
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.gray)
-                }
+                clearSearchFieldButton
             }
         }
         .padding(.horizontal, 12)

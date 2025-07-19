@@ -20,6 +20,7 @@ struct FavoriteFloatingButton: View {
                 .scaleEffect(showingFavoritesOnly ? 1.1 : 1.0)
                 .glassEffect(in: .circle)
                 .animation(.spring(response: 0.4, dampingFraction: 0.6), value: showingFavoritesOnly)
+                .accessibilityIdentifier("favoritesFilterButton")
             }
         }
     }

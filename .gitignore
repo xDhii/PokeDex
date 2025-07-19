@@ -1,0 +1,48 @@
+# Xcode
+.DS_Store
+build/
+DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+*.xcuserdatad/
+*.xccheckout/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/xcshareddata/WorkspaceSettings.xcsettings
+
+# Swift Package Manager
+/.swiftpm/xcode/package.xcworkspace/xcuserdata/
+/.build/
+/Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# SPM local artifacts
+.artifacts/
+.artifactcache/
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Other generated files
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+*.xcdebugger/
+
+# User settings and IDE configs
+*.swp
+*.orig
+*.sublime-workspace
+*.sublime-project
+.idea/
+.vscode/
+*.code-workspace
+

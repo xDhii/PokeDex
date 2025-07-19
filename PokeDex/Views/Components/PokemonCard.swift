@@ -54,8 +54,12 @@ struct PokemonCard: View {
                                 .foregroundColor(pokemon.isFavorite ? .red : .white)
                                 .font(.system(size: 16, weight: .semibold))
                                 .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
+                                .accessibilityIdentifier(
+                                    pokemon.isFavorite ? AccessibilityIdentifier.PokemonCard.favoritedPokemonIcon : AccessibilityIdentifier.PokemonCard.notFavoritedPokemonIcon
+                                )
                         }
                         .padding(8)
+                        .accessibilityIdentifier(pokemon.isFavorite ? AccessibilityIdentifier.PokemonCard.favoritePokemonButton : AccessibilityIdentifier.PokemonCard.unfavoritePokemonButton)
                     }
                     Spacer()
                 }
@@ -69,6 +73,7 @@ struct PokemonCard: View {
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(.primary)
                     .lineLimit(1)
+                    .accessibilityIdentifier(AccessibilityIdentifier.PokemonCard.pokemonNameLabel)
 
                 Text("#\(String(format: "%03d", pokemon.cover.indexImage))")
                     .font(.system(size: 12, weight: .medium))
@@ -84,6 +89,8 @@ struct PokemonCard: View {
         .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
         .scaleEffect(1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: pokemon.isFavorite)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(AccessibilityIdentifier.PokemonCard.pokemonCard)
     }
 }
 

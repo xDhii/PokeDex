@@ -51,7 +51,7 @@ struct ContentView: View {
                     }
                 }
 
-                // MARK: - Floating Elements
+                // MARK: - Floating Filter Buttons
 
                 ZStack {
                     VStack {
