@@ -1,4 +1,3 @@
-
 # ✨ PokeDex iOS App ✨
 
 [![Swift Version](https://img.shields.io/badge/Swift-6.2%2B-orange.svg)](https://swift.org)
@@ -8,41 +7,46 @@
 [![API](https://img.shields.io/badge/API-PokeAPI%20v2-red.svg)](https://pokeapi.co/)
 [![UI Framework](https://img.shields.io/badge/UI-SwiftUI%20%26%20Combine-green.svg)](https://developer.apple.com/documentation/swiftui)
 
-Welcome to the PokeDex iOS application repository! This is a modern, native iOS application built with SwiftUI and Combine, providing a clean, feature-rich, and intuitive interface for exploring the fascinating world of Pokémon. It leverages the power of the **PokeAPI** for comprehensive data and incorporates features like real-time search and favorites management.
+Welcome to the PokeDex iOS application repository! This is a modern, native iOS app built with **Swift 6.2**, **SwiftUI 6**, and **Combine**, utilizing Swift's modern concurrency features (`async/await`). The app offers a clean, responsive, and feature-rich interface for exploring the fascinating world of Pokémon. It leverages the power of the **PokeAPI v2** for comprehensive data and is architected with a strong focus on preview-driven development and modern testing practices.
 
 ---
 
 ## 🚀 Overview
 
-This application serves as a robust digital encyclopedia for Pokémon enthusiasts. Users can seamlessly browse through a dynamically loaded grid of Pokémon, utilize real-time search, view detailed information (including stats with visual progress bars, abilities, types with dynamic color theming), and manage their favorite Pokémon with persistent storage.
+This application serves as a robust digital encyclopedia for Pokémon enthusiasts. Users can seamlessly browse through a dynamically loaded, responsive grid of Pokémon, utilize real-time search, view detailed Pokémon information (including stats with visual progress bars, abilities, and dynamic type-based color theming), and manage their favorite Pokémon with persistent storage.
 
-The project emphasizes clean code, scalability, and modern iOS development practices, structured around the MVVM architecture using `ObservableObject` and Combine for state management.
+The project emphasizes clean code, scalability, and modern iOS development practices, structured around the MVVM architecture using `ObservableObject` and Combine for state management, with full support for SwiftUI 6 previews and modern concurrency.
 
 ## 🎨 Key Features
 
-*   📱 **Modern UI (SwiftUI):** Clean, card-based layout with gradient backgrounds and dynamic type-based color theming.
-*   🔍 **Browse Pokémon:** Infinite scroll through the complete Pokédex with a grid layout.
-*   ⚡ **Real-time Search:** Find your favorite Pokémon instantly with live search functionality.
-*   ❤️ **Favorites System:** Save and manage your favorite Pokémon with persistent storage (using `UserDefaults`).
+*   📱 **Modern UI (SwiftUI 6):** Clean, card-based layout with gradient backgrounds and dynamic type-based color theming.
+*   🔍 **Browse Pokémon:** Infinite scroll with enhanced dynamic loading indicators through the complete Pokédex, featuring an improved responsive grid that adapts seamlessly to size classes.
+*   ⚡ **Real-time Search:** Instantly find your favorite Pokémon with live search functionality.
+*   ❤️ **Favorites System:** Save and manage your favorite Pokémon persistently using `UserDefaults`.
+*   🧭 **Floating Favorites Button:** Quick filter toggle through a floating favorites button (`FavoriteFloatingButton`) for effortless access.
+*   🎛️ **Generation Selector Floating Tab:** Filter Pokémon by generation with an intuitive floating tab selector (`GenerationTabSelector`), enhancing browsing control.
 *   ⚖️ **Filter Toggle:** Easily switch between viewing all Pokémon or only your favorites.
 *   🗑️ **Delete Functionality:** Remove Pokémon from your favorites collection.
+*   🖼️ **Rich Background Styling:** Employs a sophisticated `BackgroundView` to provide rich and immersive backgrounds consistent across screens.
 *   📊 **Detailed Stats View:** Comprehensive Pokémon information including:
     *   Height and Weight with proper unit conversion.
     *   Abilities with styled presentation.
     *   Base Stats with visual progress bars.
     *   Type badges with color coding.
-*   🔄 **Pull-to-refresh:** Update the Pokémon list easily.
-*   🔌 **PokeAPI Integration:** Fetches live data from the official [PokeAPI v2](https://pokeapi.co/).
+*   🔄 **Pull-to-refresh:** Effortlessly update the Pokémon list with native pull-to-refresh support.
+*   🔌 **PokeAPI Integration:** Fetches live data from the official [PokeAPI v2](https://pokeapi.co/) using Swift’s native concurrency.
 *   🏗️ **MVVM Architecture:** Clean separation of concerns using the Model-View-ViewModel pattern with `ObservableObject`.
-*   ⚙️ **Swift Concurrency & Combine:** Built using modern Swift features like `async/await` and the Combine framework for handling asynchronous operations and state management.
-*   🖼️ **Asynchronous Image Loading:** Efficiently loads Pokémon images.
-*    natively for iOS with optimal performance.
+*   ⚙️ **Swift Concurrency & Combine:** Leveraging modern Swift features like `async/await` and Combine for responsive asynchronous operations and robust state management.
+*   🖼️ **Asynchronous Image Loading:** Efficient and smooth loading of Pokémon images.
+*   🧪 **Modern Previews:** Utilizes SwiftUI’s updated `#Preview` macro for rich, interactive previews throughout the app.
 
 ### Screenshots
 
 | Home Screen (Grid & Search) | Pokemon Detail (Stats & Info) | Favorites Screen |
 |---|---|---|
 | ![image](https://github.com/user-attachments/assets/726aecf6-8c09-4d3c-b6de-a627612869f5) | ![image](https://github.com/user-attachments/assets/1a8d4e8d-7385-4e55-a20a-ea30ffd5763c) | ![image](https://github.com/user-attachments/assets/79dcb3b8-1f6d-4cc9-939c-1212b26ad856) |
+
+*Note: Screenshots will be updated soon to reflect the latest UI enhancements and features.*
 
 ---
 
@@ -52,7 +56,7 @@ This application relies heavily on the [**PokeAPI (v2)**](https://pokeapi.co/) t
 
 *   **Base URL:** `https://pokeapi.co/api/v2/`
 *   **Primary Endpoint Used:** `/pokemon` (for listing and details)
-*   **Data Fetching:** The `NetworkService.swift` class handles the API requests using Swift's native `URLSession` with `async/await`. It fetches lists of Pokémon using pagination (`offset` and `limit` parameters) and retrieves detailed data for individual Pokémon.
+*   **Data Fetching:** The `NetworkService.swift` class handles API requests using Swift's native `URLSession` with `async/await`. It fetches lists of Pokémon using pagination (`offset` and `limit` parameters) and retrieves detailed data for individual Pokémon.
     *   Example List Fetch URL: `https://pokeapi.co/api/v2/pokemon?offset=0&limit=20`
 *   **Data Parsing:** Fetched JSON data is decoded into Swift `struct` models (defined in the `Models` directory, including DTOs) using `JSONDecoder`.
 
@@ -62,117 +66,32 @@ For more details on the available endpoints and data structures, please refer to
 
 ## 🏗️ Architecture & Project Structure
 
-The project strictly follows the **Model-View-ViewModel (MVVM)** pattern using `ObservableObject` for state management, ensuring a clean and maintainable codebase:
+The project strictly follows the **Model-View-ViewModel (MVVM)** pattern using `ObservableObject` for state management, ensuring a clean, maintainable, and testable codebase, leveraging SwiftUI 6 and modern concurrency:
 
 *   **Model:** (`Models/`) Defines data structures (e.g., `Pokemon`, `PokemonDetail`, DTOs) mirroring API responses and app data.
-*   **View:** (`Views/`) SwiftUI views responsible for rendering the UI and capturing user interactions (e.g., `ContentView`, `DetailView`, `PokemonCard`). Views are kept declarative and reactive.
-*   **ViewModel:** (`ViewModels/`) Contains presentation logic, fetches data via Services, manages state using `@Published` properties, and handles user actions.
+*   **View:** (`Views/`) SwiftUI views responsible for rendering UI and capturing user interactions. Views utilize declarative syntax, preview macros (`#Preview`), and are organized into feature folders and reusable `Components`.
+*   **ViewModel:** (`ViewModels/`) Contains presentation logic, fetches data via Services, manages state using `@Published` properties, and handles user actions with Combine and async/await.
 *   **Service:** (`Services/`) Manages external interactions, primarily network requests (`NetworkService`, `PokemonService`) and data persistence (`UserDefaults` for favorites).
-*   **Utilities:** (`Utilities/`) Contains helper functions, extensions (`Color`, `String`, `View`), constants, and reusable components like `ImageLoader`.
+*   **Utilities:** (`Utilities/`) Contains helper functions, extensions (`Color`, `String`, `View`), constants, and reusable components like `ImageLoader`. Also includes `Helpers/` and `Extensions/` folders for clear separation.
 *   **Resources:** (`Resources/`) Includes assets (`Assets.xcassets`) and configuration files (`Info.plist`).
 
-```
-PokeDex/
-├── App/
-│   └── PokeDexApp.swift
-├── Services/
-│   ├── PokemonService.swift
-│   └── NetworkService.swift
-├── ViewModels/
-│   ├── ContentViewModel.swift
-│   └── DetailViewModel.swift
-├── Views/
-│   ├── ContentView.swift
-│   ├── Detail/
-│   │   ├── DetailView.swift
-│   │   └── Components/
-│   │       ├── DetailHeaderView.swift
-│   │       ├── DetailTypesView.swift
-│   │       ├── DetailStatsView.swift
-│   │       └── DetailAbilitiesView.swift
-│   └── Components/
-│       ├── PokemonCard.swift
-│       ├── SearchBar.swift
-│       ├── LoadingView.swift
-│       └── EmptyStateView.swift
-├── Models/
-│   ├── Pokemon.swift
-│   ├── PokemonDetail.swift
-│   ├── PokemonType.swift
-│   ├── PokemonStats.swift
-│   ├── PokemonAbility.swift
-│   └── DTOs/
-│       ├── PokemonListResponse.swift
-│       ├── PokemonDetailResponse.swift
-│       └── PokemonBasicInfo.swift
-├── Utilities/
-│   ├── Extensions/
-│   │   ├── Color+Extensions.swift
-│   │   ├── String+Extensions.swift
-│   │   └── View+Extensions.swift
-│   ├── Constants.swift
-│   └── Helpers/
-│       ├── UnitConverter.swift
-│       └── ImageLoader.swift
-└── Resources/
-    ├── Assets.xcassets
-    └── Info.plist
-```
 
----
+## 🧪 Tests & Quality Assurance
 
-## 🛠️ Tech Stack
+This project includes a suite of automated UI tests written with **XCTest** and native Xcode tools. The tests cover key user scenarios such as:
 
-*   **Language:** Swift 6.2+
-*   **Framework:** SwiftUI + Combine
-*   **Architecture:** MVVM with `ObservableObject` pattern
-*   **Networking:** URLSession with `async/await`
-*   **Data Persistence:** `UserDefaults` for favorites
-*   **State Management:** `@Published` properties with Combine bindings
-*   **API:** [PokeAPI v2](https://pokeapi.co/)
+- Searching for Pokémon by name and validating search results
+- Favoriting and unfavoriting Pokémon
+- Filtering Pokémon by favorites using the floating favorites button
+- Verifying UI elements and state changes in search and favorites workflows
 
----
+### How to Run the Tests
 
-## 📋 Requirements
+**Via Xcode:**
+1. Open the project in Xcode (26.0+)
+2. Select the desired simulator or device
+3. Press `Cmd + U` or go to `Product > Test`
 
-*   iOS 26.0+
-*   Xcode 26.0+
-*   Swift 6.2+
-
----
-
-## 🚀 Installation & Setup
-
-To set up and run the project locally, follow these steps:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/xDhii/PokeDex.git
-    ```
-2.  **Navigate to the project directory:**
-    ```bash
-    cd PokeDex
-    ```
-3.  **Open the Xcode Project:**
-    Double-click the `PokeDex.xcodeproj` file.
-4.  **Select Target Device:**
-    Choose an iOS Simulator (e.g., iPhone 16 Pro) or connect a physical iOS device running iOS 26.0+.
-5.  **Build & Run:**
-    Press `Cmd + R` or click the Run button in Xcode.
-
-The application will build and launch on the selected device/simulator.
-
----
-
-## 📄 License
-
-This project is distributed under the MIT License. See the `LICENSE` file for more information. (Note: Please add a `LICENSE` file to your repository if one doesn't exist).
-
----
-
-## 📧 Contact
-
-Owner: **Adriano Valumin**
-
-Project Link: [https://github.com/xDhii/PokeDex](https://github.com/xDhii/PokeDex)
-
+**Via Terminal (xcodebuild):**
+```sh
+xcodebuild test -scheme PokeDex -destination 'platform=iOS Simulator,name=iPhone 16 Pro'
