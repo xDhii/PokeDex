@@ -77,8 +77,7 @@ struct PokemonCard: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity)
-//            .background(Color(.systemBackground))
-            .background(.ultraThinMaterial)
+            .glassEffect(in: .rect)
         }
         .background(Color(.systemBackground))
         .cornerRadius(16)

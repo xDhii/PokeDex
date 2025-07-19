@@ -14,7 +14,8 @@ struct DetailView: View {
 
     var body: some View {
         ZStack {
-            // Background gradient
+            // MARK: - Background gradient
+
             LinearGradient(
                 colors: [viewModel.backgroundColorPokemonType.opacity(0.3), viewModel.backgroundColorPokemonType.opacity(0.1)],
                 startPoint: .topLeading,
@@ -24,19 +25,22 @@ struct DetailView: View {
 
             ScrollView {
                 VStack(spacing: 24) {
-                    // Header Section
+                    // MARK: - Header Section
+
                     PokemonHeaderView(
                         pokemon: pokemon,
                         backgroundColor: viewModel.backgroundColorPokemonType
                     )
 
-                    // Loading state
+                    // MARK: - Loading state
+
                     if viewModel.isLoading {
                         ProgressView("Loading...")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
 
-                    // Types Section
+                    // MARK: - Types Section
+
                     if let detail = viewModel.pokemonDetail {
                         PokemonTypesView(
                             types: detail.types,
@@ -44,7 +48,8 @@ struct DetailView: View {
                         )
                     }
 
-                    // Physical Characteristics
+                    // MARK: - Physical Characteristics
+
                     if let detail = viewModel.pokemonDetail {
                         PokemonPhysicalView(
                             height: detail.height,
@@ -52,7 +57,8 @@ struct DetailView: View {
                         )
                     }
 
-                    // Abilities Section
+                    // MARK: - Abilities Section
+
                     if let detail = viewModel.pokemonDetail {
                         PokemonAbilitiesView(
                             abilities: detail.abilities,
@@ -60,7 +66,8 @@ struct DetailView: View {
                         )
                     }
 
-                    // Stats Section
+                    // MARK: - Stats Section
+
                     if let detail = viewModel.pokemonDetail {
                         PokemonStatsView(
                             stats: detail.stats,
@@ -74,7 +81,7 @@ struct DetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 HStack {
                     Button(action: toggleFavorite) {
                         Image(systemName: pokemon.isFavorite ? "heart.fill" : "heart")

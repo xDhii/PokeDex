@@ -16,6 +16,7 @@ class ContentViewModel: ObservableObject {
     @Published var hasMorePages: Bool = true
     @Published var searchText: String = ""
     @Published var showingFavoritesOnly: Bool = false
+    @Published var selectedGeneration: Int = 1
 
     private let pokemonService = PokemonService.shared
     private var cancellables = Set<AnyCancellable>()

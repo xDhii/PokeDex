@@ -33,6 +33,7 @@ struct PokemonHeaderView: View {
                         )
                     )
                     .shadow(color: backgroundColor.opacity(0.3), radius: 10, x: 0, y: 5)
+                    .glassEffect(in: .circle)
             )
 
             Text(pokemon.data.name.capitalized)

@@ -1,9 +1,9 @@
 
 # ✨ PokeDex iOS App ✨
 
-[![Swift Version](https://img.shields.io/badge/Swift-6.1%2B-orange.svg)](https://swift.org)
-[![Platform](https://img.shields.io/badge/platform-iOS%2018.0%2B-lightgrey.svg)](https://developer.apple.com/ios/)
-[![Xcode Version](https://img.shields.io/badge/Xcode-16.4%2B-blue.svg)](https://developer.apple.com/xcode/)
+[![Swift Version](https://img.shields.io/badge/Swift-6.2%2B-orange.svg)](https://swift.org)
+[![Platform](https://img.shields.io/badge/platform-iOS%2026.0%2B-lightgrey.svg)](https://developer.apple.com/ios/)
+[![Xcode Version](https://img.shields.io/badge/Xcode-26.0%2B-blue.svg)](https://developer.apple.com/xcode/)
 [![Architecture](https://img.shields.io/badge/Architecture-MVVM%20(ObservableObject)-blueviolet.svg)](https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app)
 [![API](https://img.shields.io/badge/API-PokeAPI%20v2-red.svg)](https://pokeapi.co/)
 [![UI Framework](https://img.shields.io/badge/UI-SwiftUI%20%26%20Combine-green.svg)](https://developer.apple.com/documentation/swiftui)
@@ -42,7 +42,7 @@ The project emphasizes clean code, scalability, and modern iOS development pract
 
 | Home Screen (Grid & Search) | Pokemon Detail (Stats & Info) | Favorites Screen |
 |---|---|---|
-| ![image](https://github.com/user-attachments/assets/37e944ad-8db3-4c6b-8cd7-5300cd33ef97) | ![image](https://github.com/user-attachments/assets/b7695037-bfaf-4db0-b8b3-86ac7279da4a) | ![image](https://github.com/user-attachments/assets/b79ac892-18e6-4f75-a59f-d35703dfeaed) |
+| ![image](https://github.com/user-attachments/assets/726aecf6-8c09-4d3c-b6de-a627612869f5) | ![image](https://github.com/user-attachments/assets/1a8d4e8d-7385-4e55-a20a-ea30ffd5763c) | ![image](https://github.com/user-attachments/assets/79dcb3b8-1f6d-4cc9-939c-1212b26ad856) |
 
 ---
 
@@ -123,7 +123,7 @@ PokeDex/
 
 ## 🛠️ Tech Stack
 
-*   **Language:** Swift 6.1+
+*   **Language:** Swift 6.2+
 *   **Framework:** SwiftUI + Combine
 *   **Architecture:** MVVM with `ObservableObject` pattern
 *   **Networking:** URLSession with `async/await`
@@ -135,9 +135,9 @@ PokeDex/
 
 ## 📋 Requirements
 
-*   iOS 18.0+
-*   Xcode 16.4+
-*   Swift 6.1+
+*   iOS 26.0+
+*   Xcode 26.0+
+*   Swift 6.2+
 
 ---
 
@@ -156,7 +156,7 @@ To set up and run the project locally, follow these steps:
 3.  **Open the Xcode Project:**
     Double-click the `PokeDex.xcodeproj` file.
 4.  **Select Target Device:**
-    Choose an iOS Simulator (e.g., iPhone 15 Pro) or connect a physical iOS device running iOS 15.0+.
+    Choose an iOS Simulator (e.g., iPhone 16 Pro) or connect a physical iOS device running iOS 26.0+.
 5.  **Build & Run:**
     Press `Cmd + R` or click the Run button in Xcode.
 
