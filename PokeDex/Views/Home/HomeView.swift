@@ -1,13 +1,13 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  PokeDex
 //
-//  Created by Adriano Valumin on 29/04/25.
+//  Created by Adriano Valumin on 20/07/25.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     @StateObject private var viewModel = ContentViewModel()
     @Environment(\.horizontalSizeClass) private var sizeClass
     @State private var isGenerationSelectorExpanded = false
@@ -20,12 +20,12 @@ struct ContentView: View {
         NavigationStack {
             ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
-                    // MARK: - Header with logo and searchbar
+                        // MARK: - Header with logo and searchbar
 
                     VStack {
                         PokemonHeader()
 
-                        // Search Bar
+                            // Search Bar
                         SearchBar(searchText: $viewModel.searchText)
                             .background(Color(.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -34,7 +34,7 @@ struct ContentView: View {
                     .padding(.bottom, 10)
                     .background(Color(.red))
 
-                    // MARK: - Pokémons Grid
+                        // MARK: - Pokémons Grid
 
                     BackgroundView {
                         ScrollView {
@@ -51,15 +51,15 @@ struct ContentView: View {
                     }
                 }
 
-                // MARK: - Floating Filter Buttons
+                    // MARK: - Floating Filter Buttons
 
                 ZStack {
                     VStack {
-                        // Floating favorites button
+                            // Floating favorites button
                         if !isGenerationSelectorExpanded {
                             FavoriteFloatingButton(showingFavoritesOnly: $viewModel.showingFavoritesOnly)
                         }
-                        // Pokemon Gen floating selector
+                            // Pokemon Gen floating selector
                         GenerationTabSelector(
                             selectedGeneration: $viewModel.selectedGeneration,
                             isExpanded: $isGenerationSelectorExpanded
@@ -77,5 +77,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }

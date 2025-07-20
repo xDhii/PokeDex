@@ -1,41 +1,52 @@
-# Xcode
+# macOS system files
 .DS_Store
+
+# Xcode build products and derived data
 build/
 DerivedData/
+*.moved-aside
+*.xcresult
+
+# Xcode project files
+*.xcodeproj
+*.xcworkspace
+*.xcscmblueprint
+*.xccheckout/
+*.xcdebugger/
 *.xcuserstate
+*.xcuserdatad/
+*.xcshareddata/
+*.xcsettings
+
+# Xcode workspace/project specific folders
 *.xcworkspace/xcuserdata/
 *.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
-*.xcuserdatad/
-*.xccheckout/
 *.xcodeproj/project.xcworkspace/xcuserdata/
 *.xcodeproj/xcuserdata/
 *.xcodeproj/xcshareddata/WorkspaceSettings.xcsettings
 
+# SwiftUI specific
+*.canvas
+.preview-thumbnails
+
+# SwiftUI Previews cache
+.swiftpm/xcode/preview/
+
 # Swift Package Manager
-/.swiftpm/xcode/package.xcworkspace/xcuserdata/
-/.build/
-/Package.resolved
+.swiftpm/
+.build/
+Package.resolved
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+# New SPM package cache introduced in Xcode 26
+.xcode_package_cache/
 
 # CocoaPods
 Pods/
 Podfile.lock
 
 # Carthage
+Carthage/
 Carthage/Build/
-
-# SPM local artifacts
-.artifacts/
-.artifactcache/
-
-# Playgrounds
-timeline.xctimeline
-playground.xcworkspace
-
-# Other generated files
-*.moved-aside
-*.xcuserstate
-*.xcscmblueprint
-*.xcdebugger/
 
 # User settings and IDE configs
 *.swp
@@ -46,3 +57,6 @@ playground.xcworkspace
 .vscode/
 *.code-workspace
 
+# Artifact caches
+.artifacts/
+.artifactcache/
