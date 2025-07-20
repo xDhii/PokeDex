@@ -21,6 +21,7 @@ struct HomeScreen {
     var favoritesFilterButton: XCUIElement { app.buttons[identifiers.FloatingButtons.favoritesFilterButton] }
 
     // MARK: - Pokemon Card UI Elements
+
     let test = AccessibilityIdentifier.PokemonCard.pokemonNameLabel
     var pokemonNameLabel: XCUIElement { app.staticTexts[identifiers.PokemonCard.pokemonNameLabel] }
     var favoritePokemonButton: XCUIElement { app.buttons[identifiers.PokemonCard.favoritePokemonButton] }
@@ -30,20 +31,25 @@ struct HomeScreen {
 
     // MARK: - Search Actions
 
+    /// Searches for a Pokémon by name using the search field.
+    /// - Parameter name: The name of the Pokémon to search for.
     func searchForPokemon(_ name: String) {
-        searchField.tap()
-        searchField.typeText(name)
+        searchField.waitAndTap()
+        searchField.waitAndtapAndType(name)
     }
 
+    /// Clears the search field using the clear button.
     func clearSearch() {
-        clearSearchFieldButton.tap()
+        clearSearchFieldButton.waitAndTap()
     }
 
+    /// Validates if the searched Pokémon is present in the search results.
+    /// - Parameter pokemonName: The expected Pokémon name in the results.
     func validateSearchedPokemon(_ pokemonName: String) {
         // Validation when a single card is returned
         XCTAssertTrue(pokemonNameLabel.exists)
         XCTAssertEqual(pokemonNameLabel.firstMatch.label, pokemonName)
-        
+
         // Validation when multiple cards are returned
         let allLabels = app.staticTexts.matching(identifier: AccessibilityIdentifier.PokemonCard.pokemonNameLabel).allElementsBoundByIndex
         let exists = allLabels.contains { $0.label == pokemonName }
@@ -52,25 +58,32 @@ struct HomeScreen {
 
     // MARK: - Favorites Actions
 
+    /// Applies the filter to show only favorited Pokémon.
     func applyFavoritesFilter() {
-        favoritesFilterButton.tap()
+        favoritesFilterButton.waitAndTap()
     }
-    
+
+    /// Marks the current Pokémon as favorited.
     func favoritePokemon() {
-        favoritePokemonButton.tap()
+        favoritePokemonButton.waitAndTap()
     }
-    
+
+    /// Removes the favorite mark from the current Pokémon.
     func unfavoritePokemon() {
-        unfavoritePokemonButton.tap()
+        unfavoritePokemonButton.waitAndTap()
     }
-    
+
     // MARK: - Validations
-    
+
+    /// Validates if the favorited Pokémon is visible on the screen.
+    /// - Parameter pokemonName: The name of the Pokémon that should be visible.
     func validateFavoritedPokemonIsVisible(pokemonName: String) {
         XCTAssertTrue(pokemonNameLabel.exists)
         XCTAssertEqual(pokemonNameLabel.firstMatch.label, pokemonName)
     }
-    
+
+    /// Validates the search result to ensure the correct Pokémon is listed and that a different Pokémon is not displayed.
+    /// - Parameter pokemonName: The expected Pokémon name in the search results.
     func validateSearchResult(pokemonName: String) {
         XCTAssertTrue(pokemonNameLabel.exists)
         XCTAssertEqual(pokemonNameLabel.firstMatch.label, pokemonName)
@@ -79,5 +92,12 @@ struct HomeScreen {
         } else {
             XCTAssertNotEqual(pokemonNameLabel.label, "Pikachu")
         }
+    }
+
+    /// Validates that no unfavorited Pokémon is visible and that the favorite button is present.
+    /// Use this after to validate that no favorite pokemons are visible.
+    func validateNoFavoritePokemonIsVisible() {
+        XCTAssertFalse(unfavoritePokemonButton.exists)
+        XCTAssertTrue(favoritePokemonButton.exists)
     }
 }

@@ -55,11 +55,11 @@ struct PokemonCard: View {
                                 .font(.system(size: 16, weight: .semibold))
                                 .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
                                 .accessibilityIdentifier(
-                                    pokemon.isFavorite ? AccessibilityIdentifier.PokemonCard.favoritedPokemonIcon : AccessibilityIdentifier.PokemonCard.notFavoritedPokemonIcon
+                                    pokemon.isFavorite ? AccessibilityIdentifier.PokemonCard.notFavoritedPokemonIcon : AccessibilityIdentifier.PokemonCard.favoritedPokemonIcon
                                 )
                         }
                         .padding(8)
-                        .accessibilityIdentifier(pokemon.isFavorite ? AccessibilityIdentifier.PokemonCard.favoritePokemonButton : AccessibilityIdentifier.PokemonCard.unfavoritePokemonButton)
+                        .accessibilityIdentifier(pokemon.isFavorite ? AccessibilityIdentifier.PokemonCard.unfavoritePokemonButton : AccessibilityIdentifier.PokemonCard.favoritePokemonButton)
                     }
                     Spacer()
                 }

@@ -6,6 +6,7 @@
 //
 import XCTest
 
+/// UI tests to verify the main functionalities related to favoriting and filtering Pokémon in the application.
 final class FavoritesUITests: XCTestCase {
     static let app = XCUIApplication()
     let home = HomeScreen(app: app)
@@ -15,30 +16,33 @@ final class FavoritesUITests: XCTestCase {
         FavoritesUITests.app.launch()
     }
 
-    func testSearchBar() throws {
-        let pokemonName = "Bulbasaur"
-        home.searchForPokemon(pokemonName)
-        home.validateSearchResult(pokemonName: pokemonName)
-
-    }
-
+    /// Checks if the favorites filter correctly displays a favorited Pokémon after searching and favoriting it.
     func testTextFavoritesFilter() throws {
+        // Arrange
         let pokemonName = "Pikachu"
 
+        // Act
         home.searchForPokemon(pokemonName)
+        home.favoritePokemon()
         home.clearSearch()
         home.applyFavoritesFilter()
-        
+
+        // Assert
         home.validateFavoritedPokemonIsVisible(pokemonName: pokemonName)
     }
-    
-    func testFavoriteAndUnfavoritePokemon() {
+
+    /// Checks if a Pokémon can be favorited and then unfavorited after searching.
+    func testFavoriteAndUnfavoriteSearchedPokemon() {
+        // Arrange
         let pokemonName = "Pikachu"
 
+        // Act
         home.searchForPokemon(pokemonName)
         home.validateSearchedPokemon(pokemonName)
         home.favoritePokemon()
         home.unfavoritePokemon()
-        
+
+        // Assert
+        home.validateNoFavoritePokemonIsVisible()
     }
 }

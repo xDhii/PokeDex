@@ -6,42 +6,23 @@
 //
 import XCTest
 
+/// UI tests to verify main search functionalities for Pokémon in the application.
 final class SearchUITests: XCTestCase {
-    let app = XCUIApplication()
+    static let app = XCUIApplication()
+    let home = HomeScreen(app: app)
 
     override func setUpWithError() throws {
         continueAfterFailure = false
-        app.launch()
+        SearchUITests.app.launch()
     }
 
+    /// Checks if the search field correctly finds a Pokémon by its name.
     func testSearchBar() throws {
-        let searchField = app.textFields["searchTextField"]
-        let pokemonName = app.staticTexts["pokemonNameLabel"]
-        XCTAssertTrue(searchField.exists)
-        searchField.tap()
-        searchField.typeText("Pikachu")
-
-        XCTAssertTrue(pokemonName.exists)
-        XCTAssertEqual(pokemonName.label, "Pikachu")
-        XCTAssertNotEqual(pokemonName.label, "Bulbasaur")
+        // Arrange
+        let pokemonName = "Bulbasaur"
+        // Act
+        home.searchForPokemon(pokemonName)
+        // Assert
+        home.validateSearchResult(pokemonName: pokemonName)
     }
-
-    func testTextFavoritesFilter() throws {
-        let searchField = app.textFields["searchTextField"]
-        let pokemonName = app.staticTexts["pokemonNameLabel"]
-        let favoritePokemonButton = app.buttons["favoritePokemonButton"]
-        let favoritesFilterButton = app.buttons["favoritesFilterButton"]
-        let clearSearchFieldButton = app.buttons["clearSearchFieldButton"]
-
-        searchField.tap()
-        searchField.typeText("Pikachu")
-        favoritePokemonButton.tap()
-        clearSearchFieldButton.tap()
-        favoritesFilterButton.tap()
-
-        XCTAssertTrue(pokemonName.exists)
-        XCTAssertEqual(pokemonName.firstMatch.label, "Pikachu")
-    }
-
-
 }
