@@ -7,7 +7,7 @@
 
 import XCTest
 
-struct HomeScreen {
+struct HomeView {
     let app: XCUIApplication
     let identifiers = AccessibilityIdentifier.self
 
@@ -22,7 +22,7 @@ struct HomeScreen {
 
     // MARK: - Pokemon Card UI Elements
 
-    let test = AccessibilityIdentifier.PokemonCard.pokemonNameLabel
+    var pokemonCard: XCUIElement { app.otherElements[identifiers.PokemonCard.pokemonCard]}
     var pokemonNameLabel: XCUIElement { app.staticTexts[identifiers.PokemonCard.pokemonNameLabel] }
     var favoritePokemonButton: XCUIElement { app.buttons[identifiers.PokemonCard.favoritePokemonButton] }
     var unfavoritePokemonButton: XCUIElement { app.buttons[identifiers.PokemonCard.unfavoritePokemonButton] }
@@ -73,6 +73,10 @@ struct HomeScreen {
         unfavoritePokemonButton.waitAndTap()
     }
 
+    func navigateToPokemonDetailView() {
+        pokemonNameLabel.waitAndTap()
+    }
+
     // MARK: - Validations
 
     /// Validates if the favorited Pokémon is visible on the screen.
@@ -84,7 +88,7 @@ struct HomeScreen {
 
     /// Validates the search result to ensure the correct Pokémon is listed and that a different Pokémon is not displayed.
     /// - Parameter pokemonName: The expected Pokémon name in the search results.
-    func validateSearchResult(pokemonName: String) {
+    func validateSearchResultIsVisible(pokemonName: String) {
         XCTAssertTrue(pokemonNameLabel.exists)
         XCTAssertEqual(pokemonNameLabel.firstMatch.label, pokemonName)
         if pokemonName == "Pikachu" {
@@ -92,6 +96,10 @@ struct HomeScreen {
         } else {
             XCTAssertNotEqual(pokemonNameLabel.label, "Pikachu")
         }
+    }
+
+    func validateSearchResultIsEmpty() {
+        XCTAssertFalse(pokemonCard.exists)
     }
 
     /// Validates that no unfavorited Pokémon is visible and that the favorite button is present.

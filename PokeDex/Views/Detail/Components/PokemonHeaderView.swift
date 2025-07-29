@@ -10,6 +10,7 @@ import SwiftUI
 struct PokemonHeaderView: View {
     let pokemon: Pokemon
     let backgroundColor: Color
+    let identifiers = AccessibilityIdentifier.PokemonDetailView.self
 
     var body: some View {
         VStack(spacing: 16) {
@@ -18,6 +19,8 @@ struct PokemonHeaderView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .scaleEffect(1.18)
+                    .accessibilityIdentifier(identifiers.pokemonImage)
+
             }
             .frame(width: 200, height: 200)
             .background(
@@ -40,6 +43,7 @@ struct PokemonHeaderView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
+                .accessibilityIdentifier(identifiers.pokemonNameLabel)
         }
         .padding(.top)
     }

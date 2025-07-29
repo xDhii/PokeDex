@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct DetailView: View {
+struct PokemonDetailView: View {
     let pokemon: Pokemon
     @StateObject private var viewModel = DetailViewModel()
     @Environment(\.dismiss) private var dismiss
+    let identifiers = AccessibilityIdentifier.PokemonDetailView.self
 
     var body: some View {
         ZStack {
@@ -81,6 +82,17 @@ struct DetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image(systemName: "chevron.backward")
+                }
+                .accessibilityIdentifier(identifiers.backButton)
+            }
+
+            // MARK: - Favorite and Delete from Toolbar
+
             ToolbarItem(placement: .topBarTrailing) {
                 HStack {
                     Button(action: toggleFavorite) {
@@ -88,15 +100,18 @@ struct DetailView: View {
                             .foregroundColor(pokemon.isFavorite ? .red : .gray)
                             .font(.title2)
                     }
+                    .accessibilityIdentifier(pokemon.isFavorite ? identifiers.unfavoriteButton : identifiers.favoriteButton)
 
                     Button(action: deletePokemon) {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
                             .font(.title2)
                     }
+                    .accessibilityIdentifier(identifiers.deleteButton)
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             Task {
                 await viewModel.fetchPokemonDetail(for: pokemon)
@@ -118,7 +133,7 @@ struct DetailView: View {
 
 #Preview {
     NavigationView {
-        DetailView(
+        PokemonDetailView(
             pokemon: Pokemon(data: PokemonDTO(name: "Pikachu"), cover: PokemonCover(indexImage: 25))
         )
     }

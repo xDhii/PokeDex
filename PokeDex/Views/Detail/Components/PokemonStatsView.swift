@@ -10,6 +10,7 @@ import SwiftUI
 struct PokemonStatsView: View {
     let stats: [PokemonStat]
     let backgroundColor: Color
+    let identifiers = AccessibilityIdentifier.PokemonDetailView.self
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -58,6 +59,7 @@ struct PokemonStatsView: View {
                 }
             }
             .frame(height: 6)
+            .accessibilityIdentifier(identifiers.pokemonStatsBar)
         }
     }
 }

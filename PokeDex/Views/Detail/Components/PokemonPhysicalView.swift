@@ -10,6 +10,7 @@ import SwiftUI
 struct PokemonPhysicalView: View {
     let height: Int
     let weight: Int
+    let identifiers = AccessibilityIdentifier.PokemonDetailView.self
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -25,6 +26,7 @@ struct PokemonPhysicalView: View {
                     Text("\(String(format: "%.1f", Double(height) / 10.0)) m")
                         .font(.title3)
                         .fontWeight(.semibold)
+                        .accessibilityIdentifier(identifiers.pokemonHeightLabel)
                 }
 
                 Divider()
@@ -37,6 +39,7 @@ struct PokemonPhysicalView: View {
                     Text("\(String(format: "%.1f", Double(weight) / 10.0)) kg")
                         .font(.title3)
                         .fontWeight(.semibold)
+                        .accessibilityIdentifier(identifiers.pokemonWeightLabel)
                 }
 
                 Spacer()

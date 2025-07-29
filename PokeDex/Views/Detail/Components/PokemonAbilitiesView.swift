@@ -10,6 +10,7 @@ import SwiftUI
 struct PokemonAbilitiesView: View {
     let abilities: [String]
     let backgroundColor: Color
+    let identifiers = AccessibilityIdentifier.PokemonDetailView.self
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -31,6 +32,7 @@ struct PokemonAbilitiesView: View {
                         .shadow(color: backgroundColor.opacity(0.3), radius: 4, x: 0, y: 2)
                 }
             }
+            .accessibilityIdentifier(identifiers.pokemonAbilitiesList)
         }
         .padding()
         .background(Color(.systemBackground).opacity(0.3))

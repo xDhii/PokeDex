@@ -39,7 +39,7 @@ struct GenerationTabSelector: View {
                         }
                     }
                 }
-                .glassEffect(in: .rect)
+                .glassEffect(.clear.tint(.gray.opacity(0.6)).interactive(), in: .rect)
                 .frame(width: 280)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .padding(.bottom, 70)
@@ -73,7 +73,7 @@ struct GenerationTabSelector: View {
                                 .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isExpanded)
                         }
                     }
-                    .glassEffect()
+                    .glassEffect(.clear)
                 }
             }
         }

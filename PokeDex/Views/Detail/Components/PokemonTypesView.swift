@@ -10,6 +10,7 @@ import SwiftUI
 struct PokemonTypesView: View {
     let types: [PokemonDetailTypes]
     let getBackgroundColor: (String) -> Color
+    let identifiers = AccessibilityIdentifier.PokemonDetailView.self
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -32,6 +33,8 @@ struct PokemonTypesView: View {
                 }
                 Spacer()
             }
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier(identifiers.pokemonTypesList)
         }
         .padding()
         .background(Color(.systemBackground).opacity(0.3))
@@ -49,9 +52,9 @@ struct PokemonTypesView: View {
         ],
         getBackgroundColor: { type in
             switch type {
-                case "electric": return .yellow
-                case "fire": return .red
-                default: return .gray
+            case "electric": return .yellow
+            case "fire": return .red
+            default: return .gray
             }
         }
     )

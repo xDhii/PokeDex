@@ -13,7 +13,7 @@ struct PokemonGrid: View {
             spacing: 12
         ) {
             ForEach(viewModel.filteredPokemons) { pokemon in
-                NavigationLink(destination: DetailView(pokemon: pokemon)) {
+                NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
                     PokemonCard(pokemon: pokemon)
                 }
                 .buttonStyle(PlainButtonStyle())

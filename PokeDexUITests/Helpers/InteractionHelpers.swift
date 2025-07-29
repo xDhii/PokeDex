@@ -28,4 +28,13 @@ extension XCUIElement {
         XCTAssertTrue(self.waitForExistence(timeout: timeout), "Element not visible")
         self.tap()
     }
+
+    /// Waits for the element to appear within the specified timeout.
+    /// - Parameter timeout: The timeout to wait for the element to exist (in seconds). Default is 8 seconds.
+    ///
+    /// Use this helper in UI tests when you need to verify that an element is present and visible before proceeding.
+    func waitUntilExists(timeout: TimeInterval = 8) {
+        XCTAssertTrue(self.waitForExistence(timeout: timeout), "Element not visible")
+    }
 }
+
